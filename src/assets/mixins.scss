@@ -13,6 +13,18 @@
      align-items: $align-items;
 }
 
+@mixin verticalPadding($paddingTop, $paddingBotom) {
+
+        padding-top: $paddingTop;
+        padding-bottom: $paddingBotom;
+}
+
+@mixin verticalMargin ($marginTop, $marginBottom) {
+
+        margin-top: $marginTop;
+        margin-bottom: $marginBottom;
+}
+
 @mixin  for-mobile {
        @media screen and (max-width:$sm-screen) {
               @content;
