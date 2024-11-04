@@ -1,0 +1,20 @@
+@import './variables.scss';
+
+@mixin center($padding){
+      margin-left: auto;
+      margin-right: auto;
+      padding: $padding;
+}
+
+@mixin flexConfig($justify-content,$wrap,$align-items) {
+     display: flex;
+     justify-content: $justify-content;
+     flex-wrap: $wrap;
+     align-items: $align-items;
+}
+
+@mixin  for-mobile {
+       @media screen and (max-width:$sm-screen) {
+              @content;
+       }
+}
