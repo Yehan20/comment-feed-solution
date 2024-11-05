@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import Footer from '../components/Footer.vue';
-import Header from '../components/Header.vue';
-import CommentFeed from '../views/CommentFeed.vue';
+import TheFooter from '../components/TheFooter.vue';
+import TheHeader from '../components/TheHeader.vue';
+import CommentFeedView from '../views/CommentFeedView.vue';
 
 
 </script>
 
 <template>
-    <Header/>
+    <TheHeader />
     <main class="container">
-          <CommentFeed/>
+        <CommentFeedView />
     </main>
-    <Footer/>
+    <TheFooter />
 </template>

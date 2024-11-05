@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CommentButton from './CommentButton.vue';
+import TextEditorAddButton from './TextEditorAddButton.vue';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import CommentButton from './CommentButton.vue';
          <textarea name="" id=""  :rows="10" class="text__editor" placeholder="text"></textarea>
          <div class="text__editor__foter">
                <p>0/800 Characters</p>
-                <CommentButton/>
+                <TextEditorAddButton/>
          </div>
     </div>
 </template>
@@ -37,6 +37,7 @@ import CommentButton from './CommentButton.vue';
      .text__editor__foter {
           background-color: $mediumGray;
           padding: 0 10px;
+          margin-top: -2px;
           @include flexConfig(space-between,nowrap,center) 
      }
 </style>
