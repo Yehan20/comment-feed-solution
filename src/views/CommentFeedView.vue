@@ -21,13 +21,13 @@ import TextEditor from '../components/TextEditor.vue';
     </div>
 </template>
 <style lang="scss" scoped>
-  @import '../assets/mixins.scss';
+  @use '../assets/mixins.scss' as m;
   
   .comment__feed {
-    @include verticalPadding(40px,40px);
+    @include m.verticalPadding(40px,40px);
   }
   .question__wrapper {
-      @include verticalMargin(0px,20px)
+      @include m.verticalMargin(0px,20px)
   }
   .question__detail {
      max-width: 750px;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import CommentReply from './CommentReply.vue';
+
+import CommentReply from './CommentReply.vue'
 
 const props = defineProps<{
     comments: any[]
@@ -51,13 +52,14 @@ const getRepliesPerComment = (id:number)=>{
 </div>
    
 </template>
+
 <style lang="scss">
-@import '../assets/mixins.scss';
-@import '../assets/variables.scss';
+@use  '../assets/mixins.scss' as m;
+@use  '../assets/variables.scss' as v;
 
 .single__comment {
-    @include verticalPadding(30px, 0);
-    @include flexConfig(flex-start, nowrap, stretch);
+    @include m.verticalPadding(30px, 0);
+    @include m.flexConfig(flex-start, nowrap, stretch);
     gap: 20px;
     max-width: 750px;
 
@@ -66,7 +68,7 @@ const getRepliesPerComment = (id:number)=>{
     }
 
     .single__comment__user {
-        @include flexConfig(flex-start, nowrap, stretch);
+        @include m.flexConfig(flex-start, nowrap, stretch);
         flex-direction: column;
 
         img {
@@ -81,7 +83,7 @@ const getRepliesPerComment = (id:number)=>{
 
         p {
             font-size: 13px;
-            color: $darkGray;
+            color: v.$darkGray;
             font-weight: 500;
 
             span {
@@ -102,9 +104,9 @@ const getRepliesPerComment = (id:number)=>{
     .line {
         height: 100%;
         width: 1px;
-        background-color: $mediumGray;
+        background-color: v.$mediumGray;
         margin-top: 2px;
-        @include center(0);
+        @include m.center(0);
     }
 }
 </style

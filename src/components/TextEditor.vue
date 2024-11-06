@@ -14,13 +14,13 @@ import TextEditorAddButton from './TextEditorAddButton.vue';
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/variables.scss';
-@import '../assets/mixins.scss';
+@use  '../assets/variables.scss' as v;
+@use '../assets/mixins.scss' as m;
      .text__editor__container{
          max-width: 750px;
           h4 {
              text-transform: uppercase;
-             color: $darkGray;
+             color: v.$darkGray;
              font-weight: 300;
              font-size: 14px;
              margin-bottom: 10px;
@@ -30,14 +30,14 @@ import TextEditorAddButton from './TextEditorAddButton.vue';
             
              width: 100%;
              padding: 10px;
-             color: $darkGray;
+             color: v.$darkGray;
              
           }
      }
      .text__editor__foter {
-          background-color: $mediumGray;
+          background-color: v.$mediumGray;
           padding: 0 10px;
           margin-top: -2px;
-          @include flexConfig(space-between,nowrap,center) 
+          @include m.flexConfig(space-between,nowrap,center) 
      }
 </style>

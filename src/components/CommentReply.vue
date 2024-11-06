@@ -21,14 +21,15 @@ addIcons(PxMessageReply);
 
 
 </template>
+
 <style scoped lang="scss">
-@import '../assets/mixins.scss';
-@import '../assets/variables.scss';
+
+@use '../assets/variables.scss' as v;
 
 .single__comment__reply  p {
      margin: 0;
      font-size: 13px;
-     color: $darkGray;
+     color: v.$darkGray;
      font-weight: 500;
 }
 </style>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-
 import CommentList from './CommentList.vue';
 
 
@@ -59,9 +58,9 @@ const replies = ()=>{
 </template>
 <style scoped lang="scss">
 
-@import '../assets/mixins.scss';
+@use '../assets/mixins.scss' as m;
 
 .comments__list__section {
-    @include verticalPadding(10px, 0);
+    @include m.verticalPadding(10px, 0);
 }
 </style>
