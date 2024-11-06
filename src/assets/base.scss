@@ -1,5 +1,5 @@
-@import './variables.scss';
-@import './mixins.scss';
+@use './variables.scss'  as stylesheet;
+@use './mixins.scss'  as *;
 
 *,*::before ,*::after {
      box-sizing: border-box;
@@ -9,12 +9,12 @@ html {
 }
 body {
      margin: 0;
-     font-family: $ff-main;
+     font-family: stylesheet.$ff-main;
      min-height: 100vh;
      display: flex;
      flex-direction: column; 
      font-size: 1rem;
-     background-color: $lightGray;
+     background-color: stylesheet.$lightGray;
 }
 
 #app {
@@ -30,28 +30,28 @@ img {
      max-width: 100%;
 }
 textarea {
-      outline: 1px solid $mediumGray;
+      outline: 1px solid stylesheet.$mediumGray;
       border: 0;
       border-radius: 3px;
-      font-family: $ff-main;
+      font-family: stylesheet.$ff-main;
 }
 .container {
-     max-width:$containerWidth;
+     max-width:stylesheet.$containerWidth;
      width: 100%;
-     @include center($padding-small);
+     @include center(stylesheet.$padding-small);
 }
 
 // Header Styling
 .header__wrapper {
-      background-color: $red;
-      color: $white;
+      background-color: stylesheet.$red;
+      color: stylesheet.$white;
       .header__details {
           @include flexConfig(space-between,nowrap,center);
           
       }
       .logo__heading {
-        font-family: $ff-logo;
-        font-size: $fs-logo;
+        font-family: stylesheet.$ff-logo;
+        font-size: stylesheet.$fs-logo;
         font-weight: 400;
       }
 }
@@ -61,8 +61,8 @@ textarea {
 .footer__wrapper {
      margin-top: auto;
      text-align: center;
-     background-color: $red;
-     color: $white;
+     background-color: stylesheet.$red;
+     color: stylesheet.$white;
 }
 
 .btn {
@@ -79,7 +79,7 @@ textarea {
       }
      
       &.btn__comment {
-          background-color: $red;
-          color: $lightGray;
+          background-color: stylesheet.$red;
+          color: stylesheet.$lightGray;
       }
 }

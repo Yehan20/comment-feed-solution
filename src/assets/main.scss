@@ -1,2 +1,2 @@
-@import url('./reset.scss');
-@import url('./base.scss');
+@use './reset.scss' as *;
+@use './base.scss' as *;
