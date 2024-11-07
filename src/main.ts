@@ -1,7 +1,12 @@
 import { createApp } from 'vue'
 import { OhVueIcon } from "oh-vue-icons";
+import { createPinia } from 'pinia';
 
-import './assets/main.scss';
+
+import './assets/scss/main.scss';
 import App from './App.vue'
 
-createApp(App).component("v-icon", OhVueIcon).mount('#app')
+const piniaStore = createPinia();
+
+
+createApp(App).use(piniaStore).component("v-icon", OhVueIcon).mount('#app')

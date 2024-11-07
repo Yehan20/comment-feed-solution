@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import CommentReply from './CommentReply.vue';
+
+import { Message } from '../types/message';
+import CommentReply from './CommentReply.vue'
 
 const props = defineProps<{
-    comments: any[]
-    allReplies: any[]
+
+    comments: Message[]
+    allReplies: Message[]
     bar?: number
 }>()
 
@@ -12,30 +15,30 @@ const getRepliesPerComment = (id:number)=>{
 }
 </script>
 <template> 
-    <div class="single__comment" v-for="comment, index in comments" :key="index">  
+    <div class="single__comment" v-for="(comment, index) in comments" :key="index">  
         <div class="single__comment__user">
-            <img src="https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            <img :src="comment.profilePic ? comment.profilePic  :'https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'"
                 width="30" height="30" alt="">
             <div class="line">
 
             </div>
         </div>
         <div class="single__comment__body">
-            <div>
+        
                 <p>
                     <span>
-                        User0001
+                        {{ comment.userName }}
                     </span>
-                    .0 Points .less than a minute ago
+                    .{{ comment.points }} Points .less than a minute ago
                 </p>
 
                 <p class="comment">
                    
-                    {{ comment.comment }}
+                    {{ comment.message }}
                 </p>
 
 
-                <CommentReply>
+                <CommentReply :messageInfo="{id:comment.id,upvoted:comment.isUpvoted ,downvoted:comment.isDownvoted}">
 
                             <comment-list     
                             v-for="(subComment , index) in  getRepliesPerComment(comment.id)"
@@ -46,18 +49,19 @@ const getRepliesPerComment = (id:number)=>{
                 </CommentReply>
             </div>
 
-        </div>
+     
 
 </div>
    
 </template>
+
 <style lang="scss">
-@import '../assets/mixins.scss';
-@import '../assets/variables.scss';
+@use  '../assets/scss/mixins.scss' as m;
+@use  '../assets/scss/variables.scss' as v;
 
 .single__comment {
-    @include verticalPadding(30px, 0);
-    @include flexConfig(flex-start, nowrap, stretch);
+    @include m.verticalPadding(30px, 0);
+    @include m.flexConfig(flex-start, nowrap, stretch);
     gap: 20px;
     max-width: 750px;
 
@@ -66,7 +70,7 @@ const getRepliesPerComment = (id:number)=>{
     }
 
     .single__comment__user {
-        @include flexConfig(flex-start, nowrap, stretch);
+        @include m.flexConfig(flex-start, nowrap, stretch);
         flex-direction: column;
 
         img {
@@ -78,10 +82,10 @@ const getRepliesPerComment = (id:number)=>{
 
     .single__comment__body {
 
-
+       width: 90%;
         p {
             font-size: 13px;
-            color: $darkGray;
+            color: v.$darkGray;
             font-weight: 500;
 
             span {
@@ -102,9 +106,9 @@ const getRepliesPerComment = (id:number)=>{
     .line {
         height: 100%;
         width: 1px;
-        background-color: $mediumGray;
+        background-color: v.$mediumGray;
         margin-top: 2px;
-        @include center(0);
+        @include m.center(0);
     }
 }
 </style
