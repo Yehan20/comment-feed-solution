@@ -1,52 +1,18 @@
 <script setup lang="ts">
 
+import { usecommentFeedStore } from '../store/commentFeedStore';
 import CommentList from './CommentList.vue';
 
 
-const  commentFeed:any[] = [
+const commentFeedStore = usecommentFeedStore();
 
-            {
-                id: 1,
-                comment: "hello world", 
-                parentId:null
-            },
-            {
-                id: 2,
-                comment: "hello world",
-                parentId:1
-            },
-            {
-                id: 3,
-                comment: "hello world",
-                parentId:2
-            },
-            {
-                id: 4,
-                comment: "hello world",
-                parentId:3
-            },
-            {
-                id: 5,
-                comment: "hello world",
-                parentId:4
-            },
-            {
-                id: 6,
-                comment: "hello world",
-                parentId:5
-            },
-            {
-                id: 7,
-                comment: "hello world",
-                parentId:6
-            },
-];
+
 
 const comments = (id = null)=>{
-       return commentFeed.filter((comment)=>comment.parentId  === id);
+       return commentFeedStore.commentFeed.filter((comment)=>comment.parentId  === id);
 }
 const replies = ()=>{
-       return commentFeed.filter((replyForComment)=>replyForComment.parentId  !== null);
+       return commentFeedStore.commentFeed.filter((replyForComment)=>replyForComment.parentId  !== null);
 }
 
 
@@ -56,9 +22,10 @@ const replies = ()=>{
         <CommentList  :comments="comments()" :allReplies="replies()" />
     </div>
 </template>
+
 <style scoped lang="scss">
 
-@use '../assets/mixins.scss' as m;
+@use '../assets/scss/mixins.scss' as m;
 
 .comments__list__section {
     @include m.verticalPadding(10px, 0);
