@@ -6,8 +6,14 @@ export interface  Message {
      points:number;
      isUpvoted:boolean;
      isDownvoted:boolean;
-     createdAt?:Date;
+     createdAt:Date;
      profilePic:string ;
      userName:string;
 
+}
+
+export interface LocalStorage {
+      commentFeed:Message[];
+      originalFeed:Message[];
+      isSortByUpdate:boolean;
 }
