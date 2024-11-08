@@ -1,4 +1,4 @@
-import { Message } from "../types/message"
+import { LocalStorage, Message } from "../types/message"
 
 // Upvote senrios  breakdown
 export function helperUpvote(changedComment:Message,){ 
@@ -65,4 +65,19 @@ export function helperDownvote(changedComment:Message,){
         return 
 
      }
+}
+
+export function helperLocalStorage(key:string): LocalStorage | null{
+    const storageData = localStorage.getItem(key);
+    if(!storageData){
+        return null ;
+    }
+
+    let parsedData:LocalStorage=  JSON.parse(storageData);
+
+    return  parsedData; 
+}
+
+export function helperUpdateLocalStorage(key:string,storageData:LocalStorage) {
+    localStorage.setItem(key,JSON.stringify(storageData));
 }
