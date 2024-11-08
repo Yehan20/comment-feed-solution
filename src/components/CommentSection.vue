@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+// import { onUpdated } from 'vue';
 import { usecommentFeedStore } from '../store/commentFeedStore';
 import CommentList from './CommentList.vue';
 
@@ -9,11 +10,15 @@ const commentFeedStore = usecommentFeedStore();
 
 
 const comments = (id = null)=>{
-       return commentFeedStore.commentFeed.filter((comment)=>comment.parentId  === id);
+
+        return commentFeedStore.commentFeed.filter((comment)=>comment.parentId  === id); // top level comments
+
 }
 const replies = ()=>{
-       return commentFeedStore.commentFeed.filter((replyForComment)=>replyForComment.parentId  !== null);
+        return commentFeedStore.commentFeed.filter((replyForComment)=>replyForComment.parentId  !== null); // child level comments    
+
 }
+
 
 
 </script>
