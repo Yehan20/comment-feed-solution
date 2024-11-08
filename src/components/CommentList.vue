@@ -1,13 +1,13 @@
 <script setup lang="ts">
-
 import { Message } from '../types/message';
 import CommentReply from './CommentReply.vue'
+
 
 const props = defineProps<{
 
     comments: Message[]
     allReplies: Message[]
-    bar?: number
+
 }>()
 
 const getRepliesPerComment = (id:number)=>{
@@ -36,16 +36,22 @@ const getRepliesPerComment = (id:number)=>{
                    
                     {{ comment.message }}
                 </p>
-
-
-                <CommentReply :messageInfo="{id:comment.id,upvoted:comment.isUpvoted ,downvoted:comment.isDownvoted}">
-
-                            <comment-list     
+                <CommentReply
+           
+                  :messageInfo="
+                  {id:comment.id,
+                    upvoted:comment.isUpvoted ,downvoted:comment.isDownvoted ,  amount:getRepliesPerComment(comment.id).length,replies:props.allReplies}">
+                       
+             
+                               <comment-list 
+                
                             v-for="(subComment , index) in  getRepliesPerComment(comment.id)"
                             :key="index"
                             :comments="allReplies.filter((comment)=>comment.id === subComment.id)"
                             :allReplies="allReplies"
                               />
+                    
+                      
                 </CommentReply>
             </div>
 
