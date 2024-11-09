@@ -8,15 +8,35 @@ import CommentList from './CommentList.vue';
 const commentFeedStore = usecommentFeedStore();
 
 
-
+// extract the main comments top level
 const comments = (id = null)=>{
+      
+     
+      if(commentFeedStore.isSortByUpvote){
+           const sorted  = [...commentFeedStore.commentFeed].filter((comment)=>comment.parentId  === id).sort((a,b)=>b.points - a.points);
 
-        return commentFeedStore.commentFeed.filter((comment)=>comment.parentId  === id); // top level comments
+           return sorted;
+      }
+      
+       return commentFeedStore.commentFeed.filter((comment)=>comment.parentId  === id); // top level comments
+
 
 }
-const replies = ()=>{
-        return commentFeedStore.commentFeed.filter((replyForComment)=>replyForComment.parentId  !== null); // child level comments    
 
+// extract all the replies of any level
+const replies = ()=>{
+       
+      if(commentFeedStore.isSortByUpvote){
+
+           const sorted  = [...commentFeedStore.commentFeed].filter((comment)=>comment.parentId  !== null).sort((a,b)=>b.points - a.points);
+          
+          
+           return sorted;
+      }
+
+
+        return commentFeedStore.commentFeed.filter((replyForComment)=>replyForComment.parentId  !== null); // child level comments    
+ 
 }
 
 
