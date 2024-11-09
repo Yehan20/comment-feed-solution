@@ -9,11 +9,12 @@ export interface  Message {
      createdAt:Date;
      profilePic:string ;
      userName:string;
+     collapsed:  boolean;
 
 }
 
 export interface LocalStorage {
-      commentFeed:Message[];
-      originalFeed:Message[];
-      isSortByUpdate:boolean;
+      commentFeed?:Message[];
+      originalFeed?:Message[];
+      isSortByUpdate?:boolean;
 }
