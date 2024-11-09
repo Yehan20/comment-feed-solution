@@ -1,45 +1,42 @@
 <script setup lang="ts">
 import { usecommentFeedStore } from '../store/commentFeedStore';
-// import { Key } from '../store/messageKey';
 import { Message } from '../types/message';
-// import { Key } from '../store/messageKey';
+import { helperIsNestedMessage } from '../utils/messageHelper';
 import TextEditorAddButton from './TextEditorAddButton.vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, onWatcherCleanup, ref, useTemplateRef, watch } from 'vue';
 
 // Props
 const props = defineProps<{
      showDiscussion: boolean,
-     parentId:number | null
+     parentId:number | null,
+     userName:string
 }>()
 
-
-// Pinia Stpre
+// Pinia Store
 const commentFeedStore = usecommentFeedStore();
-
-//console.log(commentFeedStore.mostUpvoted);
 
 // Consts
 const MESSAGE_LIMIT = 400;
 
-// Data
-const message = ref("");
+// Reactive Refs
+const message = ref('');
 const error = ref("");
+const canReplyWithUsername = ref(true);
+const input = useTemplateRef('text-area')
 
-// Computed
-const getMessangeLength = computed(() => message.value.length);
-
-// Injects
-// const parentId = inject("id",null); 
-// console.log(parentId);
+// Computed Methods
+const getMessangeLength = computed(() => message.value.length );
 
 // Methods
 const handleSubmit = () => {
-
+      
+     // Check Empty Values
      if (message.value==='') {
           error.value = "Message must be not be Empty"
           return;
      }
-
+    
+     // Initialize Message Object
      const MessageObj: Message = {
           id: Date.now(),
           message: message.value,
@@ -47,15 +44,16 @@ const handleSubmit = () => {
           points: 0,
           isDownvoted: false,
           isUpvoted: false,
-          userName: "John Doe",
+          userName: "Yehan",
           profilePic: '',
-          createdAt:new Date()
+          createdAt:new Date(),
+          collapsed:helperIsNestedMessage(props.parentId,commentFeedStore.commentFeed) as boolean
      }
 
+
      commentFeedStore.addComment(MessageObj);
+     emit('@autoCollapseNest'); // emit logic to auto collapse replies if new reply added 
      message.value = ''
-
-
 
      // trigger and emit to hide our text editor of its not the main 
      if (!props.showDiscussion) {
@@ -64,20 +62,48 @@ const handleSubmit = () => {
 
 
 }
-
 const handleInput = (e: Event) => {
-
+      
      let inputValue = e.target as HTMLTextAreaElement;
      error.value = '';
+     
+     inputValue.value.length < 1 ? canReplyWithUsername.value = true : null;
 
-     inputValue.value.length >= MESSAGE_LIMIT
-          ? message.value = inputValue.value = inputValue.value.substring(0, 400)
+     // if length exceeds extract string between first and max limit part and then add it to message
+     inputValue.value.length >= MESSAGE_LIMIT  ? (message.value = inputValue.value = inputValue.value.substring(0, 400))
           : message.value = inputValue.value;
 }
+const addUserNameMessage = () =>{
+     message.value =`@${props.userName} ${message.value}` 
+     canReplyWithUsername.value =  !canReplyWithUsername.value
+}
+
+//whe loaded auto focus the text editor
+onMounted(()=>{
+     console.log(input.value);
+     input.value?.focus();
+})
+
+
+// Wacth
+watch(error,()=>{
+ 
+     let timeoutId = null
+     timeoutId= setTimeout(()=>{
+           error.value =''
+     },2000)
+
+     // prevent timeout out from building
+     onWatcherCleanup(() => {
+
+      clearTimeout(timeoutId);
+  })
+})
 
 //Emits
 const emit = defineEmits<{
-     '@hideEditor': []
+     '@hideEditor': [],
+     '@autoCollapseNest':[],
 }>()
 
 </script>
@@ -85,19 +111,20 @@ const emit = defineEmits<{
 <template>
      <div class="text__editor__container" >
           <div class="text__editor__top">
-               <h4 v-if="props.showDiscussion">Discussion (8 comments)</h4>
+               <h4 v-if="props.showDiscussion">Discussion ({{ commentFeedStore.commentFeed.length }} comments)</h4>
                <h4 v-if="error" class="error__text">{{ error }}</h4>
 
           </div>
 
-          <form @submit.prevent>
-               <textarea @input="handleInput" :value="message" name="" id="" :rows="10" class="text__editor"
-                    :class="{ error: error }" placeholder="text"></textarea>
+          <form @submit.prevent role="form">
+               <textarea ref="text-area"  @input="handleInput" :value="message" name="" id="" :rows="10" class="text__editor"
+                    :class="{ error: error }" placeholder="Make it Creative :)"></textarea>
                <div class="text__editor__foter">
                     <p>{{ getMessangeLength }}/800 Characters </p>
                     <TextEditorAddButton @@addMessage="handleSubmit" />
                </div>
           </form>
+          <button v-if="props.userName" :disabled="!canReplyWithUsername " @click="addUserNameMessage">Reply using user name </button>
 
      </div>
 </template>
