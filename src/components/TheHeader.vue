@@ -8,7 +8,7 @@ addIcons(FaRegularUserCircle);
 </script>
 
 <template>
-    <header class="header__wrapper">
+    <header class="header__wrapper" role="banner">
         <div class="container">
               <div class="header__details">
                     <div>
