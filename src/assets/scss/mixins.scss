@@ -6,10 +6,11 @@
       padding: $padding;
 }
 
-@mixin flexConfig($justify-content,$wrap,$align-items) {
+@mixin flexConfig($justify-content,$wrap,$align-items,$drection:row) {
      display: flex;
      justify-content: $justify-content;
      flex-wrap: $wrap;
+     flex-direction: $drection;
      align-items: $align-items;
 }
 
