@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { FaRegularUserCircle } from "oh-vue-icons/icons";
 import {addIcons} from 'oh-vue-icons';
+import { DEFAULT_PROFILE } from "../utils/constants";
 
 
 
@@ -12,10 +13,15 @@ addIcons(FaRegularUserCircle);
         <div class="container">
               <div class="header__details">
                     <div>
-                         <h3 class="logo__heading">Comment Hub</h3>
+                         <p class="logo__heading">Comment Hub</p>
                     </div>
-                    <div>
-                        <v-icon name="fa-regular-user-circle" :scale="2"></v-icon>
+                    <div class="logo__image__wrapper">
+                        <img class="logo" :src="DEFAULT_PROFILE.profilePic" alt="User Profile"
+                          width="30"
+                        >
+                        <!-- <p class="m-none center-text">
+                             {{ DEFAULT_PROFILE.name }}
+                        </p> -->
                     </div>
                    
               </div> 
