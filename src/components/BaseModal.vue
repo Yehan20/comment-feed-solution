@@ -1,5 +1,14 @@
 <script setup lang="ts">
 
+const props = defineProps<{
+  title: string,
+  description: string
+}>()
+
+const emit = defineEmits<{
+  '@close': [],
+  '@delete': [],
+}>()
 
 </script>
 
@@ -8,18 +17,19 @@
     <div class="modal__wrapper">
       <div class="modal__content">
         <div class="modal__header">
-          <p>Discard comment?</p>
-          <button>X</button>
+          <p>{{ props.title ?? 'Your Title' }}</p>
+          <button @click="emit('@close')">X</button>
         </div>
         <div class="modal__body">
           <p>
-            You have a comment in progress, are you sure you want to discard it?
+            {{ props.description ?? 'Your Description' }}
           </p>
         </div>
-        <div class="modal__fotoer">
-          <button>Cancel</button>
-          <button>Discard</button>
-        </div>
+    
+          <div class="modal__footer" >
+            <button title="Keep on Writing" @click="emit('@close')">Cancel</button>
+            <button title="Cancel " class="btn__discard" @click="emit('@delete')">Discard</button>
+          </div>
       </div>
     </div>
   </Teleport>
@@ -41,25 +51,65 @@
   justify-content: center;
   align-items: center;
 
-   p{
-     margin: 0;
+
+  button {
+    border-radius: 30px;
+
+    &:hover {
+      opacity: 0.6;
     }
+  }
+
+  p {
+    margin: 0;
+  }
 
   .modal__content {
     max-width: 450px;
     padding: 20px;
     background: v.$white;
+    width: 100%;
     border-radius: 20px;
-    @include m.flexConfig(space-between,nowrap,stretch,column);
+    @include m.flexConfig(space-between, nowrap, stretch, column);
     gap: 25px;
 
-     .modal__header {
-           @include m.flexConfig(space-between,nowrap,center);
-         
-     }
-     .modal__body {
-      
-     }
+    .modal__header {
+      @include m.flexConfig(space-between, nowrap, center);
+
+      p {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      button {
+        padding: 10px 15px;
+      }
+
+    }
+
+    .modal__body {
+      p {
+        color: v.$darkGray;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+    }
+
+    .modal__footer {
+      @include m.flexConfig(flex-start, nowrap, center);
+      gap: 10px;
+
+      button {
+        display: inline-block;
+        padding: 10px 30px;
+
+        &.btn__discard {
+          background-color: v.$brand-color;
+          color: v.$white;
+        }
+
+      }
+    }
   }
 
 }
