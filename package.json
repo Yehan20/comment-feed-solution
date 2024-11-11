@@ -6,11 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:unit": "vitest --environment jsdom --root src/"
   },
   "dependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^25.0.1",
     "oh-vue-icons": "^1.0.0-rc3",
     "pinia": "^2.2.6",
+    "start-server-and-test": "^2.0.8",
+    "vitest": "^2.1.4",
     "vue": "^3.5.12"
   },
   "devDependencies": {
