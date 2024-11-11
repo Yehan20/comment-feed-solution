@@ -3,12 +3,11 @@
 import { PxMessageReply, BiArrowUpCircle, BiArrowDownCircle } from "oh-vue-icons/icons";
 import { addIcons } from 'oh-vue-icons';
 import TextEditor from "./TextEditor.vue";
-import { onUpdated, ref } from "vue";
+import { onMounted, onUpdated, ref } from "vue";
 import { usecommentFeedStore } from "../store/commentFeedStore"
-import { Message } from "../types/message";
-import { helperIsNestedMessage } from "../utils/messageHelper";
-
-
+import { helperHasNestedMessages } from "../utils/messageHelper";
+import BaseModal from "./BaseModal.vue";
+import CommentVoteButtonGroup from "./CommentVoteButtonGroup.vue";
 
 
 // Icom Method
@@ -20,8 +19,6 @@ const props = defineProps<{
         id: number,
         upvoted: boolean,
         downvoted: boolean,
-        replies: Message[],
-        collapsed: boolean
         parentId: number | null
         userName: string
     }
@@ -32,90 +29,113 @@ const props = defineProps<{
 const commentFeedStore = usecommentFeedStore();
 
 
-// local varabile
-const allowCollapse = ref(helperIsNestedMessage(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))
-
 // refs
-const canReply = ref(false);
-const messageCanCollapse = ref(allowCollapse.value);
-// const singleCommentRef= useTemplateRef('comment');
+const canReplyComment = ref(false);
+
+const hasNestedThreads = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))
+
+const showCommentThread = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))// main rest
 
 
-//Methods
-const toggleReply = () => void (canReply.value = !canReply.value);
+const showModel = ref(false);
 
-const handleCollapse = () => {
-    messageCanCollapse.value = !messageCanCollapse.value
+// Local varaible
 
-}
+let message = 0;
 
-// uncollapse specifc message once a reply is shown
-const autoCollapse = () => {
-    if (messageCanCollapse.value) {
-        messageCanCollapse.value = false
-
-    }
-
-
-}
-onUpdated(() => {
-    allowCollapse.value = helperIsNestedMessage(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id)
+onMounted(() => {
+    //  console.log('mount comment',canReplyComment.value);
 })
 
 
+//Methods
+const toggleReply = () => {
+    canReplyComment.value = !canReplyComment.value
+}
+
+// Expland and Collapse Nested messages 
+const handleCollapseThread = () => {
+    showCommentThread.value = !showCommentThread.value
+}
+
+// Collapse the Messages in the level of the nevly added message 
+const autoCollapseCommentThread = () => {
+
+    if (showCommentThread.value) {
+        showCommentThread.value = false
+    }
+
+}
+const deleteCurrentMessage = () => {
+    canReplyComment.value = showModel.value = false
+}
+
+const handleCancel = () => {
+
+    // if message is empty   remove  the message if not show the model 
+    (message) ? showModel.value = true :
+        canReplyComment.value = !canReplyComment.value
+
+}
+
+// Updated Life Cycle
+
+onUpdated(() => {
+    hasNestedThreads.value = helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id)
+})
 
 </script>
 <template>
-    <div class="single__comment__reply" :id="props.messageInfo.id.toString()">
+    <div class="comment__item__reply">
 
         <div class="comment__buttons__wrapper">
-            <div>
-                <button class="btn__upvote" :class="{ selected: props.messageInfo.upvoted }"
-                    :title="props.messageInfo.upvoted ? 'Click to Undo' : 'Click to Upvote'"
-                    @click="commentFeedStore.upvoteComment(props.messageInfo.id)">
+            <div class="bg-white rounded">
 
-                    <v-icon scale=1.2 name="bi-arrow-up-circle"></v-icon>
-                </button>
+                <CommentVoteButtonGroup 
+                 @@downVote="commentFeedStore.downvoteComment(props.messageInfo.id)"
+                 @@upVote="commentFeedStore.upvoteComment(props.messageInfo.id)"
+                 :upvoted="props.messageInfo.upvoted" 
+                 :downvoted="props.messageInfo.downvoted"/>
 
-                <button class="btn__downvote" :class="{ selected: props.messageInfo.downvoted }"
-                    @click="commentFeedStore.downvoteComment(props.messageInfo.id)"
-                    :title="props.messageInfo.downvoted ? 'Click to Undo' : 'Click to DownVote'">
-
-                    <v-icon scale=1.2 name="bi-arrow-down-circle"></v-icon>
-                </button>
             </div>
 
 
-            <button @click="toggleReply" :title="canReply ? 'Click to Cancel' : 'Click to Reply'">
+            <button class="btn" @click="handleCancel" v-if="canReplyComment"
+                :title="canReplyComment ? 'Click to Cancel' : 'Click to Reply'">
+                Cancel X
+            </button>
 
-                <template v-if="canReply">
-                    Cancel X
-                </template>
-
-                <template v-else>
-                    Reply <v-icon scale=1 name="px-message-reply"></v-icon>
-                </template>
+            <button class="btn" title="Click to Reply" v-else @click="canReplyComment = true">
+                Reply <v-icon scale=1 name="px-message-reply"></v-icon>
             </button>
 
 
-            <button class="" v-if="allowCollapse" @click="handleCollapse"
-                :title="messageCanCollapse ? 'Click to expand feed' : 'Click to hide feed'">
-                {{ messageCanCollapse ? 'Expand +' : 'Hide -' }}
+            <button class="btn" v-if="hasNestedThreads" @click="handleCollapseThread"
+                :title="showCommentThread ? 'Click to expand feed' : 'Click to hide feed'">
+                {{ showCommentThread ? 'Expand +' : 'Hide -' }}
+
+
             </button>
         </div>
 
 
-        <template v-if="canReply">
+        <template v-if="canReplyComment">
             <TextEditor :parentId="messageInfo.id" :userName="messageInfo.userName ?? ''"
-                @@autoCollapseNest="autoCollapse" @@hideEditor="toggleReply()" :showDiscussion="false" />
+                @@autoCollapseNest="autoCollapseCommentThread" @@hideEditor="toggleReply"
+                @@checkMessageLength="message = $event" :showDiscussion="false" />
         </template>
-        
-  
+
+
+
     </div>
 
-    <template v-if="!messageCanCollapse">
+    <template v-if="!showCommentThread">
         <slot />
     </template>
+
+    <BaseModal title="Discard comment?"
+        description="You have a comment in progress, are you sure you want to discard it? " v-if="showModel"
+        @@close=" showModel = !showModel" @@delete="deleteCurrentMessage" />
 
 
 
@@ -126,7 +146,7 @@ onUpdated(() => {
 
 
 
-.single__comment__reply {
+.comment__item__reply {
 
 
     p {
@@ -139,45 +159,39 @@ onUpdated(() => {
     .comment__buttons__wrapper {
         display: flex;
         gap: 10px;
-
-        button {
-
-            border-width: 3px;
-            background-color: v.$white;
-            border-radius: 30px;
-            padding: 4px 10px;
-
-
-
-
-            margin-bottom: 5px;
-
-            &.btn__upvote {
-                border-bottom-right-radius: 0;
-                border-top-right-radius: 0;
-                margin-right: 0;
-            }
-
-            &.btn__downvote {
-                border-bottom-left-radius: 0;
-                border-top-left-radius: 0;
-                margin-right: 0;
-
-            }
-
-            &.btn__upvote.selected {
-                color: v.$red;
-            }
-
-            &.btn__downvote.selected {
-                color: v.$blue;
-            }
-
-            &:hover {
-                opacity: 0.7;
-            }
+        margin-bottom: 5px;
+        button{
+        
+                text-transform: lowercase;
+                border-radius: 20px;
+                padding-left: 10px;
+                padding-right: 10px;
+   
+                &.btn__upvote {
+   
+                   padding: 5px;
+                   margin-right: 0;
+               }
+       
+               &.btn__downvote {
+                   padding: 5px;
+                   margin-right: 0;
+       
+               }
+          
+               &.btn__upvote.selected {
+                   color: v.$brand-color !important;
+               }
+       
+               &.btn__downvote.selected {
+                   color: v.$downvote-clr !important;
+               }
+       
+               &:hover {
+                   opacity: 0.7;
+               }     
         }
-
+      
     }
 
 }
