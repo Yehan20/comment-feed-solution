@@ -100,12 +100,12 @@ onUpdated(() => {
             </div>
 
 
-            <button class="btn" @click="handleCancel" v-if="canReplyComment"
+            <button class="btn cancel__btn" @click="handleCancel" v-if="canReplyComment"
                 :title="canReplyComment ? 'Click to Cancel' : 'Click to Reply'">
                 Cancel X
             </button>
 
-            <button class="btn" title="Click to Reply" v-else @click="canReplyComment = true">
+            <button class="btn reply__btn" title="Click to Reply" v-else @click="canReplyComment = true">
                 Reply <v-icon scale=1 name="px-message-reply"></v-icon>
             </button>
 

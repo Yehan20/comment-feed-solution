@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CommentReply > Component Should Render Correctly 1`] = `
+"<div data-v-7d6b8569="" class="comment__item__reply">
+  <div data-v-7d6b8569="" class="comment__buttons__wrapper">
+    <div data-v-7d6b8569="" class="bg-white rounded"><button data-v-1090a549="" class="btn btn__upvote" title="Click to Upvote">
+        <v-icon data-v-1090a549="" scale="1.2" name="bi-arrow-up-circle"></v-icon>
+      </button><button data-v-1090a549="" class="btn btn__downvote" title="Click to DownVote">
+        <v-icon data-v-1090a549="" scale="1.2" name="bi-arrow-down-circle"></v-icon>
+      </button></div><button data-v-7d6b8569="" class="btn reply__btn" title="Click to Reply"> Reply <v-icon data-v-7d6b8569="" scale="1" name="px-message-reply"></v-icon></button>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>
+<!--v-if-->"
+`;

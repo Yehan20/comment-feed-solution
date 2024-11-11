@@ -76,7 +76,7 @@ export function helperLocalStorage(key: string): LocalStorage | null{
 
 // Update Local Stroage when change to comment feed
 export function helperUpdateLocalStorage(key: string, storageData: LocalStorage) {
-      console.log('run helper',storageData);
+    
     
      // get the local stroage data  and parase it to make json object or else stop this metho
      let storage: LocalStorage|string = localStorage.getItem(key)  as string ;

@@ -19,6 +19,7 @@ addIcons(BiArrowDownCircle, BiArrowUpCircle);
 </script>
 
 <template>
+    
     <button class="btn btn__upvote" :class="{ selected: props.upvoted }"
         :title="props.upvoted ? 'Click to Undo' : 'Click to Upvote'"
 

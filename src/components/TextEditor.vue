@@ -20,7 +20,7 @@ const commentFeedStore = usecommentFeedStore();
 
 
 // Reactive Refs
-const message = ref('');
+const message = ref<string>('');
 const error = ref("");
 const canReplyWithUsername = ref(true);
 const input = useTemplateRef('text-area')

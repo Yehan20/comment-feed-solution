@@ -3,6 +3,7 @@ import type { LocalStorage, Message } from '../types/message';
 import { helperDownvote, helperUpvote, helperLocalStorage, helperUpdateLocalStorage } from '../utils/messageHelper';
 import { questionFeeds } from '../data/questionFeeds';
 import { QuestionFeed } from '../types/questionfeed';
+import Images from '../assets/images/profileImages';
 
 /*
    Upvote | Down Vote Logic based on reddit
@@ -26,7 +27,154 @@ export const usecommentFeedStore = defineStore('comments', {
     state: () => {
         return {
 
-            commentFeed: [] as Message[],
+            commentFeed:  [
+
+                {
+                    id: 1,
+                    message: "from azerbaijan",
+                    parentId: null,
+                    points: 7,
+                    isUpvoted: false,
+                    isDownvoted: true,
+                    userName: "Zeus",
+                    profilePic: Images.Zeus,
+                    createdAt: new Date("2021-11-08")
+                    ,
+            
+                },
+                {
+                    id: 2,
+                    message: "hello world",
+                    parentId: 1,
+                    points: 3,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Hades",
+                    profilePic: Images.Hades,
+                    createdAt: new Date("2024-10-08")
+                    ,
+            
+                },
+            
+                {
+                    id: 111,
+                    message: "hello world",
+                    parentId: 1,
+                    points: 3,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Hades ge malli",
+                    profilePic: Images.Hades,
+                    createdAt: new Date("2024-10-08")
+                    ,
+            
+                },
+                {
+                    id: 3,
+                    message: "hello world",
+                    parentId: 2,
+                    points: 5,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Hestia",
+                    profilePic: Images.Hestia,
+                    createdAt: new Date("2024-11-01"),
+            
+                },
+                {
+                    id: 4,
+                    message: "hello world",
+                    parentId: 3,
+                    points: -1,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Appollo",
+                    profilePic: Images.Appollo,
+                    createdAt: new Date("2024-08-08"),
+            
+                },
+                {
+                    id: 5,
+                    message: "hello world",
+                    parentId: 4,
+                    points: 10,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Athena",
+                    profilePic: Images.Athena,
+                    createdAt: new Date("2024-05-08"),
+            
+                },
+                {
+                    id: 6,
+                    message: "hello world",
+                    parentId: 5,
+                    points: 5,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Kronos",
+                    profilePic: Images.Kronos,
+                    createdAt: new Date("2022-11-08"),
+            
+                },
+                {
+                    id: 7,
+                    message: "hello world",
+                    parentId: 6,
+                    points: 7,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Ariest",
+                    profilePic: Images.Aries,
+                    createdAt: new Date("2023-11-08"),
+            
+                },
+            
+            
+            
+            
+                {
+                    id: 8,
+                    message: "Yehan",
+                    parentId: null,
+                    points: 8,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Dog",
+                    profilePic: Images.Aries,
+                    createdAt: new Date("2023-11-08"),
+            
+                },
+            
+            
+            
+                {
+                    id: 9,
+                    message: "Nilnaga",
+                    parentId: null,
+                    points: 9,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Cat",
+                    profilePic: Images.Aries,
+                    createdAt: new Date("2023-11-08"),
+            
+                },
+            
+                {
+                    id: 10,
+                    message: "Don",
+                    parentId: null,
+                    points: 10,
+                    isUpvoted: false,
+                    isDownvoted: false,
+                    userName: "Lion",
+                    profilePic: Images.Aries,
+                    createdAt: new Date("2023-11-08"),
+            
+                },
+            
+            ],
             isSortByUpvote: false,
             isLoaded: false,
             totalPoints: 0,
@@ -51,7 +199,7 @@ export const usecommentFeedStore = defineStore('comments', {
         },
 
         getReplies(state) {
-            console.log('cimputed call REPLY');
+      
             if (state.isSortByUpvote) {
 
                 return state.commentFeed.filter((comment) => comment.parentId !== null).sort((a, b) => b.points - a.points);
