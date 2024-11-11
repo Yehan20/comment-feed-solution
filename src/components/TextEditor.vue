@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usecommentFeedStore } from '../store/commentFeedStore';
 import { Message } from '../types/message';
-import { helperIsNestedMessage } from '../utils/messageHelper';
+import { DEFAULT_PROFILE, MESSAGE_LIMIT } from '../utils/constants';
 import TextEditorAddButton from './TextEditorAddButton.vue';
 import { computed, onMounted, onWatcherCleanup, ref, useTemplateRef, watch } from 'vue';
 
@@ -9,14 +9,15 @@ import { computed, onMounted, onWatcherCleanup, ref, useTemplateRef, watch } fro
 const props = defineProps<{
      showDiscussion: boolean,
      parentId:number | null,
-     userName:string
+     userName:string,
+    
 }>()
 
 // Pinia Store
 const commentFeedStore = usecommentFeedStore();
 
 // Consts
-const MESSAGE_LIMIT = 400;
+
 
 // Reactive Refs
 const message = ref('');
@@ -28,6 +29,7 @@ const input = useTemplateRef('text-area')
 const getMessangeLength = computed(() => message.value.length );
 
 // Methods
+
 const handleSubmit = () => {
       
      // Check Empty Values
@@ -41,13 +43,13 @@ const handleSubmit = () => {
           id: Date.now(),
           message: message.value,
           parentId: props.parentId ,
-          points: 0,
+          points:DEFAULT_PROFILE.points,
           isDownvoted: false,
           isUpvoted: false,
-          userName: "Yehan",
-          profilePic: '',
+          userName: DEFAULT_PROFILE.name,
+          profilePic: DEFAULT_PROFILE.profilePic,
           createdAt:new Date(),
-          collapsed:helperIsNestedMessage(props.parentId,commentFeedStore.commentFeed) as boolean
+         
      }
 
 
@@ -55,7 +57,7 @@ const handleSubmit = () => {
      emit('@autoCollapseNest'); // emit logic to auto collapse replies if new reply added 
      message.value = ''
 
-     // trigger and emit to hide our text editor of its not the main 
+     // trigger and emit to hide our text editor of its not the main  comment 
      if (!props.showDiscussion) {
           emit('@hideEditor');
      }
@@ -69,23 +71,31 @@ const handleInput = (e: Event) => {
      
      inputValue.value.length < 1 ? canReplyWithUsername.value = true : null;
 
+     
      // if length exceeds extract string between first and max limit part and then add it to message
      inputValue.value.length >= MESSAGE_LIMIT  ? (message.value = inputValue.value = inputValue.value.substring(0, 400))
           : message.value = inputValue.value;
+
+     // send message length  to parent to ditermine confirm model behaviour
+     emit('@checkMessageLength',message.value.length)
 }
 const addUserNameMessage = () =>{
      message.value =`@${props.userName} ${message.value}` 
      canReplyWithUsername.value =  !canReplyWithUsername.value
+     input.value?.focus();
+     emit('@checkMessageLength',message.value.length)
 }
 
-//whe loaded auto focus the text editor
+
+
+// Life cycles
 onMounted(()=>{
-     console.log(input.value);
+    // console.log(input.value);
      input.value?.focus();
 })
 
 
-// Wacth
+// Wacthers
 watch(error,()=>{
  
      let timeoutId = null
@@ -104,6 +114,7 @@ watch(error,()=>{
 const emit = defineEmits<{
      '@hideEditor': [],
      '@autoCollapseNest':[],
+     '@checkMessageLength':[amount:number],
 }>()
 
 </script>
@@ -111,20 +122,20 @@ const emit = defineEmits<{
 <template>
      <div class="text__editor__container" >
           <div class="text__editor__top">
-               <h4 v-if="props.showDiscussion">Discussion ({{ commentFeedStore.commentFeed.length }} comments)</h4>
-               <h4 v-if="error" class="error__text">{{ error }}</h4>
+               <h3 v-if="props.showDiscussion">Discussion ({{ commentFeedStore.commentFeed.length }} comments)</h3>
+               <h3 v-if="error" class="error__text">{{ error }}</h3>
 
           </div>
 
           <form @submit.prevent role="form">
                <textarea ref="text-area"  @input="handleInput" :value="message" name="" id="" :rows="10" class="text__editor"
                     :class="{ error: error }" placeholder="Make it Creative :)"></textarea>
-               <div class="text__editor__foter">
-                    <p>{{ getMessangeLength }}/800 Characters </p>
+               <div class="text__editor__footer">
+                    <p>{{ getMessangeLength }} / {{MESSAGE_LIMIT }} Characters </p>
                     <TextEditorAddButton @@addMessage="handleSubmit" />
                </div>
           </form>
-          <button v-if="props.userName" :disabled="!canReplyWithUsername " @click="addUserNameMessage">Reply using user name </button>
+          <button class="btn__basic " v-if="props.userName" :disabled="!canReplyWithUsername " @click="addUserNameMessage"  title="Click to Mention User">Mention</button>
 
      </div>
 </template>
@@ -135,8 +146,9 @@ const emit = defineEmits<{
 
 .text__editor__container {
      max-width: 750px;
+     margin:5px 0 5px 5px;
 
-     h4 {
+     h3 {
           text-transform: uppercase;
           color: v.$darkGray;
           font-weight: 300;
@@ -150,27 +162,41 @@ const emit = defineEmits<{
      }
 
      .text__editor {
-
+     
           width: 100%;
           padding: 10px;
-          color: v.$darkGray;
+          color:black;
           &.error {
-                outline-color: v.$red;
+                outline-color: v.$brand-color;
                 
           }
 
      }
      .error__text {
-           color: v.$red;
+           color: v.$brand-color;
            font-weight: 400;
            text-transform: capitalize;
      }
+  
+
+     .text__editor__footer {
+          background-color: v.$secondary-bg;
+          padding: 5px 10px;
+          margin-top: -2px;
+          @include m.flexConfig(space-between, nowrap, center)
+     }
+
+   .btn__basic {
+          display: inline-block;
+          border-width: 3px;
+          background-color: v.$white;
+          border-radius: 30px;
+          padding: 5px 10px;
+          margin: 5px 0;
+          border-width: 3px;
+     }
 }
 
-.text__editor__foter {
-     background-color: v.$mediumGray;
-     padding: 5px 10px;
-     margin-top: -2px;
-     @include m.flexConfig(space-between, nowrap, center)
-}
+
+
 </style>
