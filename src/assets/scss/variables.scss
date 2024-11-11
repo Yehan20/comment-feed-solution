@@ -1,13 +1,16 @@
 
 
 // Colors
-$red :#ff3025; 
-$blue:#1eb1f5;
-$lightGray :#f5f6fa; 
-$mediumGray:#dcddde;
-$paleYellow :#ffDaba;  
-$darkGray :#67727e; 
-$white :#fff;
+
+    // Blue
+$brand-color: #ff3025;       // Red
+$background-color:#fcf9ed;   // Light Gray
+$secondary-bg: #dcddde;       // Medium Gray
+$highlight: #ffDaba;          // Pale Yellow
+$darkGray: #67727e;         // Dark Gray
+$white: #fff;
+$content:#000;
+$downvote-clr: #1eb1f5;  
 
 // Widths
 $containerWidth:1280px;
@@ -23,7 +26,7 @@ $margin-top-large:20px;
 $margin-bottom-large:20px;
 
 // font families
-$ff-main:'Open-sans',sans-serif;
+$ff-main:'Poppins',sans-serif;
 $ff-logo:"Great Vibes", cursive;
 
 // font size

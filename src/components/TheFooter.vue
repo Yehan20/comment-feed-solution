@@ -3,9 +3,9 @@
 </script>
 
 <template>
-    <footer class="footer__wrapper">
+    <footer class="footer__wrapper" role="contentinfo">
         <div class="container">
-            Footer
+            Comment Hub | All Rights Reserved | 2024
         </div>
     </footer>
 </template>

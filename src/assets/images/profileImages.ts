@@ -14,7 +14,7 @@
 
      Aries:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSinlZ-hWtZKUofbGAi0YKIHtVRYZZyarhkCyHj9UDQG96wf-h2gV_xqYud5qJRuSuC1VY&usqp=CAU",
 
-     Kronos:"https://piofgods.com/_next/image?url=%2Fimages%2Fgods%2FKronos.png&w=3840&q=75",
+     Kronos:"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c0ca10bb-cf2d-4bf1-a9c9-16f41915d7c7/dfianvb-87df9571-2c08-4ad3-a1c2-26a72311b4df.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2MwY2ExMGJiLWNmMmQtNGJmMS1hOWM5LTE2ZjQxOTE1ZDdjN1wvZGZpYW52Yi04N2RmOTU3MS0yYzA4LTRhZDMtYTFjMi0yNmE3MjMxMWI0ZGYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Q2O-30yLdgqzpKF5DFM1s6I7SenrqUaGAzHQlC6YROE",
 
 }
 
