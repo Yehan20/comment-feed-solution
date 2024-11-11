@@ -110,7 +110,7 @@ describe('TextEditor', () => {
         const commentFeedStore = usecommentFeedStore();
 
         // Simulate typing a comment into the text area
-        const testingValue = "This is a test comment";
+        const testingValue = "hello from mars";
 
         const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
 
@@ -124,8 +124,10 @@ describe('TextEditor', () => {
         await wrapper.vm.$nextTick();
 
         // Check with the feed the value
-        expect(commentFeedStore.commentFeed.find((comment) => comment.message)?.message).toContain(testingValue);  // Adjust store state according to your setup
+        const foundComment = commentFeedStore.commentFeed.find((comment) => comment.message === testingValue);
 
+        // First, ensure that the object is found
+        expect(foundComment).toBeDefined();
     });
 
 

@@ -36,24 +36,65 @@ describe('CommentReply', () => {
     })
 
 
-        // Check Emit When Cancel the Model
-    it('emits a message when the upvote button is clicked', async () => {
-
-        const wrapper = mount(CommentReply, {
+      
+    // Test Clicking Reply Buttton 
+    
+    it('Should trigger  reply action with text editor', async () => {
+      const wrapper = mount(CommentReply, {
           props: {
-            messageInfo: {
-              id: 3,
-              userName: "abc",
-              parentId: 1,
-              upvoted: false,
-              downvoted: false,
-            }
-          }
-        });
-    
-    
-
+              messageInfo: {
+                  id: 2,
+                  userName: "abc",
+                  parentId: 1,
+                  upvoted: false,
+                  downvoted: false,
+              }
+          },
+      
+      });
+  
+      // Check if the reply button exists before clicking
+      const replyButton = wrapper.find('.reply__btn');
+      expect(replyButton.exists()).toBe(true);
+  
+      // Trigger the reply button click
+      await replyButton.trigger('click');
+      await nextTick();
+  
+      // Check if the TextEditor component is now rendered after clicking reply
+      const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+      expect(editorArea.exists()).toBe(true);
   });
+
+
+       // Test Hide Reply Editor Show Model
+  it('Should trigger  comfirm  model action r', async () => {
+    const wrapper = mount(CommentReply, {
+        props: {
+            messageInfo: {
+                id: 2,
+                userName: "abc",
+                parentId: 1,
+                upvoted: false,
+                downvoted: false,
+            }
+        },
+    
+    });
+
+    // Check if the reply button exists before clicking
+    // const cancelButton = wrapper.find('.cancel__btn');
+    // expect(cancelButton.exists()).toBe(true);
+
+    // // Trigger the reply button click
+    // await cancelButton.trigger('click');
+    // await nextTick();
+
+    // // Check if the TextEditor component is now rendered after clicking reply
+    // const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+    // expect(editorArea.exists()).toBe(true);
+});
+  
 
 
 

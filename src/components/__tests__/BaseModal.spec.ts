@@ -2,8 +2,6 @@ import { describe, it, expect, beforeEach, afterAll, beforeAll } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import BaseModal from "../BaseModal.vue";
-import CommentReply from "../CommentReply.vue";
-import { nextTick } from "vue";
 
 
 describe('BaseModal', () => {
