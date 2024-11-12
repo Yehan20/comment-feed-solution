@@ -3,14 +3,14 @@
 import { PxMessageReply, BiArrowUpCircle, BiArrowDownCircle } from "oh-vue-icons/icons";
 import { addIcons } from 'oh-vue-icons';
 import TextEditor from "./TextEditor.vue";
-import { onMounted, onUpdated, ref } from "vue";
-import { usecommentFeedStore } from "../store/commentFeedStore"
+import {  onUpdated, ref } from "vue";
+import { useCommentFeedStore  } from "../store/commentFeedStore"
 import { helperHasNestedMessages } from "../utils/messageHelper";
 import BaseModal from "./BaseModal.vue";
 import CommentVoteButtonGroup from "./CommentVoteButtonGroup.vue";
 
 
-// Icom Method
+// Icon Method
 addIcons(PxMessageReply, BiArrowDownCircle, BiArrowUpCircle);
 
 // Props
@@ -26,26 +26,19 @@ const props = defineProps<{
 
 
 // Store
-const commentFeedStore = usecommentFeedStore();
-
+const commentFeedStore = useCommentFeedStore ();
 
 // refs
 const canReplyComment = ref(false);
 
 const hasNestedThreads = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))
 
-const showCommentThread = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))// main rest
+const showCommentThread = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))
 
-
-const showModel = ref(false);
+const showModal = ref(false);
 
 // Local varaible
-
 let message = 0;
-
-onMounted(() => {
-    //  console.log('mount comment',canReplyComment.value);
-})
 
 
 //Methods
@@ -58,33 +51,37 @@ const handleCollapseThread = () => {
     showCommentThread.value = !showCommentThread.value
 }
 
-// Collapse the Messages in the level of the nevly added message 
+// Collapse the Messages in the level of the newly added message  show it 
 const autoCollapseCommentThread = () => {
 
     if (showCommentThread.value) {
-        showCommentThread.value = false
+        showCommentThread.value = false // the thread will show now
     }
 
 }
 const deleteCurrentMessage = () => {
-    canReplyComment.value = showModel.value = false
+    canReplyComment.value = showModal.value = false
 }
 
 const handleCancel = () => {
 
     // if message is empty   remove  the message if not show the model 
-    (message) ? showModel.value = true :
+    (message) ? showModal.value = true :
         canReplyComment.value = !canReplyComment.value
-
+     
+        message =0;
 }
 
-// Updated Life Cycle
 
+// update the value on every change to sync with the comemnts
 onUpdated(() => {
     hasNestedThreads.value = helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id)
+
+   
 })
 
 </script>
+
 <template>
     <div class="comment__item__reply">
 
@@ -134,8 +131,8 @@ onUpdated(() => {
     </template>
 
     <BaseModal title="Discard comment?"
-        description="You have a comment in progress, are you sure you want to discard it? " v-if="showModel"
-        @@close=" showModel = !showModel" @@delete="deleteCurrentMessage" />
+        description="You have a comment in progress, are you sure you want to discard it? " v-if="showModal"
+        @@close=" showModal = !showModal" @@delete="deleteCurrentMessage" />
 
 
 
@@ -143,8 +140,6 @@ onUpdated(() => {
 
 <style scoped lang="scss">
 @use '../assets/scss/variables.scss' as v;
-
-
 
 .comment__item__reply {
 
