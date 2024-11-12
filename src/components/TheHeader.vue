@@ -9,19 +9,17 @@ addIcons(FaRegularUserCircle);
 </script>
 
 <template>
-    <header class="header__wrapper" role="banner">
+    <header class="header__wrapper" role="banner"  aria-label="Header Section of  Comment Hub">
         <div class="container">
               <div class="header__details">
                     <div>
-                         <p class="logo__heading">Comment Hub</p>
+                         <p class="logo__heading" aria-label="Comment Hub, home page">Comment Hub</p>
                     </div>
                     <div class="logo__image__wrapper">
                         <img class="logo" :src="DEFAULT_PROFILE.profilePic" alt="User Profile"
                           width="30"
                         >
-                        <!-- <p class="m-none center-text">
-                             {{ DEFAULT_PROFILE.name }}
-                        </p> -->
+         
                     </div>
                    
               </div> 
