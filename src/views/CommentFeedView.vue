@@ -1,25 +1,24 @@
 <script setup lang="ts">
 import { onWatcherCleanup, ref, watch } from 'vue';
-import CommentSection from '../components/CommentSection.vue'
 import TextEditor from '../components/TextEditor.vue';
-import { usecommentFeedStore } from '../store/commentFeedStore';
+import { useCommentFeedStore  } from '../store/commentFeedStore';
 import { addIcons } from 'oh-vue-icons';
 import { RiLoader2Line } from 'oh-vue-icons/icons';
 import { storeToRefs } from 'pinia';
 import CommentVoteButtonGroup from '../components/CommentVoteButtonGroup.vue';
-
+import { getDate } from '../utils/dateHelper';
+import RelatedQuestionList from '../components/RelatedQuestionList.vue';
+import CommentList from '../components/CommentList.vue';
 
 
 addIcons(RiLoader2Line);
 
 // store
-const commentFeedStore = usecommentFeedStore();
+const commentFeedStore = useCommentFeedStore ();
 
 // refs
 const { isLoaded, questionId } = storeToRefs(commentFeedStore)
 const isQuestionsLoaded = ref(true);
-
-
 
 
 // Wacthers
@@ -57,15 +56,18 @@ watch(questionId, () => {
 })
 
 
-
 </script>
 <template>
-    <div class="comment__feed">
+    <section class="comment__feed">
+
+        <RelatedQuestionList />
 
         <template v-if="isQuestionsLoaded">
             <div class="question__wrapper">
+                <p class="question__author">posted by: <I>{{ commentFeedStore.askedBy }}</I> -
+                    {{ getDate(commentFeedStore.datePosted) }}</p>
 
-                <h1>{{ commentFeedStore.question }}</h1>
+                <h1 id="main-title">{{ commentFeedStore.question }}</h1>
 
                 <div class="question__detail">
                     <h2>
@@ -73,16 +75,13 @@ watch(questionId, () => {
                     </h2>
                 </div>
                 <div class="question__stats ">
-                    <!-- Upvote down vote List -->
+                 
                     <div class="bg-white rounded">
                         <CommentVoteButtonGroup @@downVote="commentFeedStore.downvoteMain()"
                             @@upVote="commentFeedStore.upovoteMain()" :upvoted="commentFeedStore.isUpvoted"
                             :downvoted="commentFeedStore.isDownvoted" />
                     </div>
                     <p class="m-none">{{ commentFeedStore.totalPoints }} points</p>
-
-
-
                 </div>
             </div>
 
@@ -102,28 +101,25 @@ watch(questionId, () => {
                 </button>
             </div>
 
-            <template v-if="commentFeedStore.isLoaded">
-                <CommentSection />
-            </template>
 
-            <template v-else>
-                <div class="loader__wraper">
-                    <v-icon scale='2' color="red" name="ri-loader-2-line"></v-icon>
-                </div>
-            </template>
+            <div class="comments__section" v-if="commentFeedStore.isLoaded">
+                <CommentList :comments="commentFeedStore.getComments(null)" />
+            </div>
+
+
+            <div class="loader__wraper" v-else>
+                <v-icon scale='2' color="red" name="ri-loader-2-line"></v-icon>
+            </div>
+
+
         </template>
 
         <template v-else>
             <div class="loader__wraper">
-                <v-icon scale='2' color="red" name="ri-loader-2-line"></v-icon>
+                <v-icon scale='2' color="#750000" name="ri-loader-2-line"></v-icon>
             </div>
         </template>
-    </div>
-
-
-
-
-
+    </section>
 
 </template>
 
@@ -132,13 +128,28 @@ watch(questionId, () => {
 @use '../assets/scss/mixins.scss' as m;
 
 .comment__feed {
-    @include m.verticalPadding(40px, 40px);
-    max-width: 750px;
+    @include m.verticalPadding(20px, 40px);
+    max-width: 1100px;
     width: 100%;
 }
 
+.comments__section {
+    @include m.verticalPadding(10px, 0);
+    overflow: auto;
+}
+
 .question__wrapper {
-    @include m.verticalMargin(0px, 20px)
+    @include m.verticalMargin(0px, 20px);
+    max-width: 950px;
+}
+
+#main-title {
+    line-height: 1.2;
+    margin: 20px 0;
+
+    @include m.for-mobile {
+        font-size: 1.6rem;
+    }
 }
 
 .question__detail h2 {
@@ -147,6 +158,14 @@ watch(questionId, () => {
     font-size: 0.9rem;
     font-weight: 400;
     margin: 10px 0;
+}
+
+.question__author {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    I {
+         font-weight: 600;
+    }
 }
 
 .question__stats {
