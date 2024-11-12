@@ -26,15 +26,16 @@ Link to the application: 'https://yn-comments-hub.netlify.app/ '
 - Recursion to Make Nested Comments
 
 ## Assumptions 
-- Used Reddits Upvote  | Downvote mechanism
-- You can only upvodte or Downvote once considering you are a user
-- Nested Comments would start collapsing once you reach 3 levels of comment
-- Canceling Reply would trigger confirmaton Modal
+- Used Reddits upvote  | downvote mechanism
+- You can only upvote or downvote once considering you are a user
+- Nested comments are collapsed after 3 levels to improve readability.
+- Cancelling a reply triggers a **confirmation modal**.
+
 
 ## Extra Features
-- Toggle Between new Questions
-- Upvote , Down Vote main Questions Points
-- Mention User name when Replying
+- Toggle Between new questions
+- Upvote and downvote main questions Points
+- Mention User name when replying option
 
 
 ## Get started
