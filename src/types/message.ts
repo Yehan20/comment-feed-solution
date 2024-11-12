@@ -1,3 +1,4 @@
+// Message Comments are considered same in this context so replies even have type of message
 export interface Message {
 
       id: number;
@@ -9,17 +10,16 @@ export interface Message {
       createdAt: Date;
       profilePic: string;
       userName: string;
-      //      collapsed:  boolean;
-
 }
 
 export interface LocalStorage {
       commentFeed?: Message[];
       isSortByUpvote?: boolean;
-      askedBy?:string
-      isDownvoted?:boolean
-      isUpvoted?:boolean
-      question?:string
-      questionDesc?:string,
-      totalPoints?:number
+      askedBy?:string;
+      isDownvoted?:boolean;
+      isUpvoted?:boolean;
+      question?:string;
+      questionDesc?:string;
+      totalPoints?:number;
+      datePosted?:Date| string;
 }
