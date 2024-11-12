@@ -27,7 +27,7 @@ const commentFeedQ1: Message[] = [
         isDownvoted: false,
         userName: "Hades",
         profilePic: Images.Hades,
-        createdAt: new Date("2024-10-08")
+        createdAt: new Date("2022-10-08")
         ,
 
     },
@@ -42,7 +42,7 @@ const commentFeedQ1: Message[] = [
         isDownvoted: false,
         userName: "Hestia",
         profilePic: Images.Hestia,
-        createdAt: new Date("2024-11-01"),
+        createdAt: new Date("2024-01-01"),
 
     },
     {
@@ -54,7 +54,7 @@ const commentFeedQ1: Message[] = [
         isDownvoted: false,
         userName: "Appollo",
         profilePic: Images.Appollo,
-        createdAt: new Date("2024-08-08"),
+        createdAt: new Date("2024-03-08"),
 
     },
     {
@@ -78,7 +78,7 @@ const commentFeedQ1: Message[] = [
         isDownvoted: false,
         userName: "Kronos",
         profilePic: Images.Kronos,
-        createdAt: new Date("2022-11-08"),
+        createdAt: new Date("2024-07-08"),
 
     },
     {
@@ -90,7 +90,7 @@ const commentFeedQ1: Message[] = [
         isDownvoted: false,
         userName: "Aries",
         profilePic: Images.Aries,
-        createdAt: new Date("2023-11-08"),
+        createdAt: new Date("2024-11-01"),
 
     },
 
@@ -195,6 +195,59 @@ const commentFeedQ1: Message[] = [
 
     },
 
+
+    {
+        id: 16,
+        message: "I guess we can agree on this lol",
+        parentId:15,
+        points: 10,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Zeus",
+        profilePic:Images.Zeus,
+        createdAt: new Date("2023-11-08"),
+
+    },
+
+    {
+        id: 17,
+        message: "Whats a time paradox if i may ask",
+        parentId:13,
+        points: 4,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Jene Smith",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2023-11-08"),
+
+    },
+
+    {
+        id: 18,
+        message: "@JeneSmith A time paradox, also known as a temporal paradox or time travel paradox, is a logical contradiction or apparent contradiction related to the idea of time travel or foreknowledge of the future. Time paradoxes are often used to demonstrate the impossibility of time travel to the past",
+        parentId:17,
+        points: 10,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Curious12",
+        profilePic:'',
+        createdAt: new Date("2024-10-08"),
+
+    },
+
+    {
+        id: 19,
+        message: "Thanks a lot",
+        parentId:18,
+        points: 2,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Jene Smith",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2024-10-09"),
+
+    },
+
 ]
 
 const commentFeedQ2:Message[]=[
@@ -207,7 +260,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: true,
         userName: "Zeus",
         profilePic: Images.Zeus,
-        createdAt: new Date("2021-11-08")
+        createdAt: new Date("2021-01-01")
     },
     {
         id: 2,
@@ -218,7 +271,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Hades",
         profilePic: Images.Hades,
-        createdAt: new Date("2024-10-08")
+        createdAt: new Date("2021-04-01")
     },
     {
         id: 111,
@@ -229,7 +282,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Time Travellor",
         profilePic: '',
-        createdAt: new Date("2024-10-08")
+        createdAt: new Date("2021-07-01")
     },
     {
         id: 3,
@@ -240,7 +293,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Hestia",
         profilePic: Images.Hestia,
-        createdAt: new Date("2024-11-01")
+        createdAt: new Date("2021-10-01")
     },
     {
         id: 4,
@@ -251,7 +304,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Appollo",
         profilePic: Images.Appollo,
-        createdAt: new Date("2024-08-08")
+        createdAt: new Date("2022-01-01")
     },
     {
         id: 5,
@@ -262,7 +315,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Athena",
         profilePic: Images.Athena,
-        createdAt: new Date("2024-05-08")
+        createdAt: new Date("2024-04-01")
     },
     {
         id: 6,
@@ -273,7 +326,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Kronos",
         profilePic: Images.Kronos,
-        createdAt: new Date("2022-11-08")
+        createdAt: new Date("2024-07-01")
     },
     {
         id: 7,
@@ -282,9 +335,9 @@ const commentFeedQ2:Message[]=[
         points: 7,
         isUpvoted: false,
         isDownvoted: false,
-        userName: "Ariest",
+        userName: "Aries",
         profilePic: Images.Aries,
-        createdAt: new Date("2023-11-08")
+        createdAt: new Date("2024-08-01")
     },
     {
         id: 8,
@@ -295,7 +348,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Dog",
         profilePic: Images.Aries,
-        createdAt: new Date("2023-11-08")
+        createdAt: new Date("2023-01-01")
     },
     {
         id: 9,
@@ -306,7 +359,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Interactivce Harp",
         profilePic: '',
-        createdAt: new Date("2023-11-08")
+        createdAt: new Date("2023-04-01")
     },
     {
         id: 10,
@@ -317,7 +370,7 @@ const commentFeedQ2:Message[]=[
         isDownvoted: false,
         userName: "Lion",
         profilePic: Images.John,
-        createdAt: new Date("2023-11-08")
+        createdAt: new Date("2023-07-01")
     }
 ]
 
@@ -331,7 +384,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: true,
         userName: "Zeus",
         profilePic: Images.Zeus,
-        createdAt: new Date("2022-11-08"),
+        createdAt: new Date("2019-01-01"),
     },
     {
         id: 2,
@@ -342,7 +395,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Hades",
         profilePic: Images.Hades,
-        createdAt: new Date("2020-10-08"),
+        createdAt: new Date("2019-03-01"),
     },
     {
         id: 111,
@@ -353,7 +406,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Interactive Harp",
         profilePic:'',
-        createdAt: new Date("2019-10-08"),
+        createdAt: new Date("2019-06-01"),
     },
     {
         id: 3,
@@ -364,7 +417,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Hestia",
         profilePic: Images.Hestia,
-        createdAt: new Date("2022-11-01"),
+        createdAt: new Date("2019-08-01"),
     },
     {
         id: 4,
@@ -375,7 +428,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Appollo",
         profilePic: Images.Appollo,
-        createdAt: new Date("2021-08-08"),
+        createdAt: new Date("2020-01-01"),
     },
     {
         id: 5,
@@ -386,7 +439,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Athena",
         profilePic: Images.Athena,
-        createdAt: new Date("2024-05-08"),
+        createdAt: new Date("2023-06-01"),
     },
     {
         id: 6,
@@ -397,7 +450,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Kronos",
         profilePic: Images.Kronos,
-        createdAt: new Date("2022-11-08"),
+        createdAt: new Date("2024-01-01"),
     },
     {
         id: 7,
@@ -406,9 +459,9 @@ const commentFeedQ3:Message[]=[
         points: 7,
         isUpvoted: false,
         isDownvoted: false,
-        userName: "Ariest",
+        userName: "Aries",
         profilePic: Images.Aries,
-        createdAt: new Date("2023-11-08"),
+        createdAt: new Date("2024-06-01"),
     },
     {
         id: 8,
@@ -419,7 +472,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Cool Dude",
         profilePic: '',
-        createdAt: new Date("2023-11-08"),
+        createdAt: new Date("2022-01-01"),
     },
     {
         id: 9,
@@ -430,7 +483,7 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "John",
         profilePic: Images.John,
-        createdAt: new Date("2023-11-08"),
+        createdAt: new Date("2022-06-01"),
     },
     {
         id: 10,
@@ -441,9 +494,10 @@ const commentFeedQ3:Message[]=[
         isDownvoted: false,
         userName: "Lion",
         profilePic: Images.Lion,
-        createdAt: new Date("2023-11-08"),
+        createdAt: new Date("2023-01-01"),
     }
 ]
+
 
 
 
