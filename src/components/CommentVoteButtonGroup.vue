@@ -36,6 +36,7 @@ addIcons(BiArrowDownCircle, BiArrowUpCircle);
     </button>
 </template>
 <style lang="scss" scoped>
+
 @use '../assets/scss/variables.scss' as v;
 
   button {
