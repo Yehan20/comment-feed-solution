@@ -108,7 +108,7 @@ watch(questionId, () => {
 
 
             <div class="loader__wraper" v-else>
-                <v-icon scale='2' color="red" name="ri-loader-2-line"></v-icon>
+                <v-icon scale='2' color="#750000" name="ri-loader-2-line"></v-icon>
             </div>
 
 
