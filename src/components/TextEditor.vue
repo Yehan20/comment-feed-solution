@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usecommentFeedStore } from '../store/commentFeedStore';
+import { useCommentFeedStore  } from '../store/commentFeedStore';
 import { Message } from '../types/message';
 import { DEFAULT_PROFILE, MESSAGE_LIMIT } from '../utils/constants';
 import TextEditorAddButton from './TextEditorAddButton.vue';
@@ -14,10 +14,7 @@ const props = defineProps<{
 }>()
 
 // Pinia Store
-const commentFeedStore = usecommentFeedStore();
-
-// Consts
-
+const commentFeedStore = useCommentFeedStore ();
 
 // Reactive Refs
 const message = ref<string>('');
@@ -90,7 +87,6 @@ const addUserNameMessage = () =>{
 
 // Life cycles
 onMounted(()=>{
-    // console.log(input.value);
      input.value?.focus();
 })
 
@@ -127,8 +123,8 @@ const emit = defineEmits<{
 
           </div>
 
-          <form @submit.prevent role="form">
-               <textarea ref="text-area"  @input="handleInput" :value="message" name="" id="" :rows="10" class="text__editor"
+          <form @submit.prevent role="form" autocomplete="on">
+               <textarea ref="text-area"  @input="handleInput" :value="message" name="" id=""  :rows="8" class="text__editor"
                     :class="{ error: error }" placeholder="Make it Creative :)"></textarea>
                <div class="text__editor__footer">
                     <p>{{ getMessangeLength }} / {{MESSAGE_LIMIT }} Characters </p>
@@ -146,7 +142,11 @@ const emit = defineEmits<{
 
 .text__editor__container {
      max-width: 750px;
+     min-width: 450px;
      margin:5px 0 5px 5px;
+     @include m.for-mobile {
+           min-width: 300px;
+     }
 
      h3 {
           text-transform: uppercase;
@@ -182,7 +182,10 @@ const emit = defineEmits<{
      .text__editor__footer {
           background-color: v.$secondary-bg;
           padding: 5px 10px;
-          margin-top: -2px;
+
+               margin-top: -5px;
+        
+     
           @include m.flexConfig(space-between, nowrap, center)
      }
 
