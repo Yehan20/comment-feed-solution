@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
+// Emits
 const props = defineProps<{
   title: string,
   description: string
 }>()
 
+// Props
 const emit = defineEmits<{
   '@close': [],
   '@delete': [],
