@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CommentVoteButtonGroup > Component Should Render Correctly 1`] = `
+"<button data-v-1090a549="" class="btn btn__upvote selected" title="Click to Undo"><svg data-v-1090a549="" class="ov-icon" style="font-size: 1.44em;" aria-hidden="true" width="23.04" height="23.04" viewBox="-1.6 -1.6 19.2 19.2" fill="currentColor">
+    <path fill-rule="evenodd" d="M1 8a7 7 0 1014 0A7 7 0 001 8zm15 0A8 8 0 110 8a8 8 0 0116 0zm-7.5 3.5a.5.5 0 01-1 0V5.707L5.354 7.854a.5.5 0 11-.708-.708l3-3a.5.5 0 01.708 0l3 3a.5.5 0 01-.708.708L8.5 5.707V11.5z"></path>
+  </svg></button>
+<button data-v-1090a549="" class="btn btn__downvote" title="Click to DownVote"><svg data-v-1090a549="" class="ov-icon" style="font-size: 1.44em;" aria-hidden="true" width="23.04" height="23.04" viewBox="-1.6 -1.6 19.2 19.2" fill="currentColor">
+    <path fill-rule="evenodd" d="M1 8a7 7 0 1014 0A7 7 0 001 8zm15 0A8 8 0 110 8a8 8 0 0116 0zM8.5 4.5a.5.5 0 00-1 0v5.793L5.354 8.146a.5.5 0 10-.708.708l3 3a.5.5 0 00.708 0l3-3a.5.5 0 00-.708-.708L8.5 10.293V4.5z"></path>
+  </svg></button>"
+`;
