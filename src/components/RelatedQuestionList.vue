@@ -14,7 +14,7 @@ const isVisible = ref(true);
 
 <template>
   <article>
-    <button class="toggle-btn" @click="  isVisible = !isVisible">
+    <button :style="{ marginBottom:isVisible?'0':'15px'}" class="toggle-btn" @click="  isVisible = !isVisible">
       <span v-if="isVisible">X</span>
       <span v-else>Show Other Questions</span>
     </button>
@@ -46,7 +46,6 @@ const isVisible = ref(true);
 article {
 
   transition: all 250ms ease-in;
-  margin-top: 10px;
   margin-bottom: 20px;
   max-width: 600px;
   width: 100%;
@@ -77,9 +76,9 @@ article {
   background: v.$brand-color;
   color: #fff;
   padding: 8px 12px;
-  transform: translateY(10px);
   border-radius: 5px;
   cursor: pointer;
+  transform: translateY(18px);
   font-size: 0.9rem;
   &:hover {
      opacity: 0.6;
