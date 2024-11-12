@@ -29,6 +29,7 @@ body {
 
 p {
      font-size: 1rem;
+     font-family: stylesheet.$ff-main;
 }
 
 img {
@@ -36,6 +37,7 @@ img {
 }
 
 button {
+     font-family:stylesheet.$ff-main;
      cursor: pointer;
 }
 
@@ -45,6 +47,8 @@ textarea {
      border: 0;
      border-radius: 3px;
      font-family: stylesheet.$ff-main;
+     resize: none;
+     font-size: 0.9rem;
 }
 main {
       padding: 70px stylesheet.$padding-small stylesheet.$padding-small stylesheet.$padding-small ;

@@ -2,9 +2,9 @@
 
 import { onMounted } from 'vue';
 import MainLayout from './layout/MainLayout.vue';
-import { usecommentFeedStore } from './store/commentFeedStore';
+import { useCommentFeedStore  } from './store/commentFeedStore';
 
-const commentFeedStore = usecommentFeedStore();
+const commentFeedStore = useCommentFeedStore ();
 
 onMounted(()=>{
       commentFeedStore.loadFeed();  

@@ -1,70 +1,52 @@
 <script setup lang="ts">
 
-import { usecommentFeedStore } from '../store/commentFeedStore';
+import Images from '../assets/images/profileImages';
+import { useCommentFeedStore  } from '../store/commentFeedStore';
 import { Message } from '../types/message';
 import { getDate } from '../utils/dateHelper';
 import CommentReply from './CommentReply.vue'
 
-
-
 const props = defineProps<{
-
     comments: Message[]
     allReplies?: Message[],
- 
 
 }>()
 
-const commentFeedStore = usecommentFeedStore();
+const commentFeedStore = useCommentFeedStore ();
 
-
-// const getRepliesPerComment = (id: number) => {
-//     return props.allReplies.filter((comment) => comment.parentId === id)
-// }
 </script>
 <template>
     <div class="comment__item" v-for="(comment, index) in props.comments" :key="index">
         <div class="comment__user">
-            <img :src="comment.profilePic"
-                width="30" height="30" alt="Profile of a User">
+            <img :src="comment.profilePic? comment.profilePic : Images.DefaultProfile" width="30" height="30" alt="Profile of a User">
             <div class="line">
-
             </div>
         </div>
         <div class="comment__body">
-
             <p>
                 <span>
                     {{ comment.userName }}
                 </span>
-                 <b> . {{ comment.points }} Points </b>. {{ getDate(comment.createdAt) }}
+                <b> . {{ comment.points }} Points </b>. {{ getDate(comment.createdAt) }}
             </p>
 
             <p class="comment__message">
-
                 {{ comment.message }}
             </p>
-   
+
             <CommentReply :messageInfo="{
-                    id: comment.id,
-                    upvoted: comment.isUpvoted, downvoted: comment.isDownvoted,
-                    parentId:comment.parentId,
-                    userName:comment.userName ?? '',
-             
-                }">
-
-
-                <comment-list  v-for="(subComment, index) in commentFeedStore.getRepliesPerComment(comment.id)" :key="index"
-                    :comments="commentFeedStore.allRepliesPerComment(subComment.id)" :allReplies="commentFeedStore.getReplies" />
-
+                id: comment.id,
+                upvoted: comment.isUpvoted, downvoted: comment.isDownvoted,
+                parentId: comment.parentId,
+                userName: comment.userName ?? '',
+            }">
+                <comment-list v-for="(subComment, index) in commentFeedStore.getRepliesPerComment(comment.id)"
+                    :key="index" :comments="commentFeedStore.getReplyPerComment(subComment.id)"
+                     />
 
             </CommentReply>
         </div>
-
-
-
     </div>
-
 </template>
 
 <style lang="scss">
@@ -75,7 +57,8 @@ const commentFeedStore = usecommentFeedStore();
     @include m.verticalPadding(10px, 0);
     @include m.flexConfig(flex-start, nowrap, stretch);
     gap: 20px;
-    max-width: 750px;
+   
+    min-width: 572px;
 
     p {
         margin: 0;
@@ -87,6 +70,8 @@ const commentFeedStore = usecommentFeedStore();
 
         img {
             border-radius: 50%;
+            min-height: 30px;
+            min-width: 30px;
         }
 
         flex-shrink: 0;
@@ -94,7 +79,8 @@ const commentFeedStore = usecommentFeedStore();
 
     .comment__body {
 
-        width: 90%;
+        width: 100%;
+        max-width: 450px;
 
         p {
             font-size: 13px;
@@ -109,8 +95,10 @@ const commentFeedStore = usecommentFeedStore();
 
         .comment__message {
 
-            font-size: 15px;
-    
+            font-size: 14px;
+            color: v.$content;
+            font-weight: 300;
+
             margin: 8px 0;
         }
 
@@ -124,4 +112,4 @@ const commentFeedStore = usecommentFeedStore();
         @include m.center(0);
     }
 }
-</style
+</style>

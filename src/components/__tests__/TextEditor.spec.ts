@@ -3,7 +3,7 @@ import TextEditor from "../TextEditor.vue";
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { nextTick } from "vue";
-import { usecommentFeedStore } from "../../store/commentFeedStore";
+import { useCommentFeedStore  } from "../../store/commentFeedStore";
 import TextEditorAddButton from "../TextEditorAddButton.vue";
 
 describe('TextEditor', () => {
@@ -48,7 +48,7 @@ describe('TextEditor', () => {
     });
 
 
-    // Emit our evnent
+    // Emit our event
     it("should emit @Check Message Length and gives the Length of our Message", async () => {
 
         const wrapper = mount(TextEditor, {
@@ -107,7 +107,7 @@ describe('TextEditor', () => {
             },
         })
 
-        const commentFeedStore = usecommentFeedStore();
+        const commentFeedStore = useCommentFeedStore ();
 
         // Simulate typing a comment into the text area
         const testingValue = "hello from mars";
@@ -120,13 +120,13 @@ describe('TextEditor', () => {
         const button = wrapper.findComponent(TextEditorAddButton)
         await button.trigger('click');
 
-        // Wait for the DOM to updatez
+        // Wait for the DOM to update
         await wrapper.vm.$nextTick();
 
         // Check with the feed the value
         const foundComment = commentFeedStore.commentFeed.find((comment) => comment.message === testingValue);
 
-        // First, ensure that the object is found
+        
         expect(foundComment).toBeDefined();
     });
 
@@ -159,11 +159,6 @@ describe('TextEditor', () => {
         expect(errorMessage.text()).toBe('Message must be not be Empty');
 
     });
-
-
-
-
-
 
 
 })

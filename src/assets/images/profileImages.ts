@@ -1,20 +1,39 @@
+import profile1  from './profiles/user-1.webp'
+import profile1_1  from './profiles/user-1.1.webp'
+import profile2  from './profiles/user-2.webp'
+import profile3  from './profiles/user-3.webp'
+import profile4  from './profiles/user-4.webp'
+import profile5  from './profiles/user-5.webp'
+import profile6  from './profiles/user-6.webp'
+import profile7  from './profiles/user-7.webp'
+import profile8  from './profiles/user-8.webp'
+import profile9  from './profiles/noproflie.webp'
+import profile10 from './profiles/lion.webp'
+import profile11 from './profiles/defaultWomen.jpg'
  const Images ={
 
-     Zeus:"https://static.wixstatic.com/media/af1176_b92bd7923fa3444f9f0d3c2f423463fe~mv2.jpg/v1/crop/x_0,y_309,w_1179,h_1370/fill/w_560,h_650,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/IMG_2021.jpg",
+     Zeus:profile1_1,
      
-     Hades:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoswWUNlPgMJRTtXAKgqabbxuHfTteTRd-IA&s",
+     Hades:profile1,
 
-     Athena:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbN7UIFL7Y7KSCbmux7aNKFMzteQ2KEKEf1w&s",
+     Athena:profile3,
 
-     Hestia:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu1lthEveH9ZJUbgMD-5tEkiEBIcT1mpySlA&s",
+     Hestia:profile4,
 
-     Appollo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9ETfJsnHKi7gPrxj-_tnVE_a8v5YjS6XYiw&s",
+     Appollo:profile5,
      
-     Posiden:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_d4mBG2L7N4pKFRM37V0t3orHydSGvNPwAA&s",
+     Posiden:profile6,
 
-     Aries:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSinlZ-hWtZKUofbGAi0YKIHtVRYZZyarhkCyHj9UDQG96wf-h2gV_xqYud5qJRuSuC1VY&usqp=CAU",
+     Aries:profile2,
 
-     Kronos:"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c0ca10bb-cf2d-4bf1-a9c9-16f41915d7c7/dfianvb-87df9571-2c08-4ad3-a1c2-26a72311b4df.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2MwY2ExMGJiLWNmMmQtNGJmMS1hOWM5LTE2ZjQxOTE1ZDdjN1wvZGZpYW52Yi04N2RmOTU3MS0yYzA4LTRhZDMtYTFjMi0yNmE3MjMxMWI0ZGYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Q2O-30yLdgqzpKF5DFM1s6I7SenrqUaGAzHQlC6YROE",
+     Kronos:profile7,
+
+     John:profile8,
+
+     DefaultProfile:profile9,
+     DefaultProfileWomen:profile11,
+
+     Lion:profile10
 
 }
 
