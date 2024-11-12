@@ -12,7 +12,7 @@ export function helperUpvote(changedComment: Message) {
     }
 
 
-    if (!changedComment.isDownvoted && changedComment.isUpvoted) {  // comment is upvoted
+    if (!changedComment.isDownvoted && changedComment.isUpvoted) {  // comment is upvoted and non downvoted
 
         changedComment["points"] = changedComment["points"] - 1
         changedComment.isUpvoted = !changedComment.isUpvoted
@@ -20,10 +20,10 @@ export function helperUpvote(changedComment: Message) {
 
     }
 
-    if (changedComment.isDownvoted && !changedComment.isUpvoted) {  // comment is downvoted not upvoted
+    if (changedComment.isDownvoted && !changedComment.isUpvoted) {  // comment is downvoted not upvoted or upvoted
 
-        changedComment.points += 2; // change 
-        changedComment.isUpvoted = !changedComment.isUpvoted; // same
+        changedComment.points += 2;  
+        changedComment.isUpvoted = !changedComment.isUpvoted; 
         changedComment.isDownvoted = !changedComment.isDownvoted;
         return
 
@@ -82,7 +82,6 @@ export function helperUpdateLocalStorage(key: string, storageData: LocalStorage)
      let storage: LocalStorage|string = localStorage.getItem(key)  as string ;
 
      
-
      if(storage){
         storage =JSON.parse(storage) as LocalStorage  
      }
@@ -94,7 +93,7 @@ export function helperUpdateLocalStorage(key: string, storageData: LocalStorage)
     }
 
 
-     // check wich of the attributes of storage data is define 
+     // check which of the attributes of storage data is define 
 
      if(storageData.commentFeed)storage["commentFeed"] =storageData.commentFeed;  
      if(storageData.isSortByUpvote !=null)storage["isSortByUpvote"] = storageData.isSortByUpvote
@@ -104,9 +103,7 @@ export function helperUpdateLocalStorage(key: string, storageData: LocalStorage)
      if(storageData.question) storage["question"] = storageData.question;
      if(storageData.totalPoints) storage["totalPoints"] = storageData.totalPoints;
      if(storageData.questionDesc) storage["questionDesc"] = storageData.questionDesc;
-
-
-     console.log(storage);
+     if(storageData.datePosted) storage["datePosted"] = storageData.datePosted;
 
 
      // update local storage parsed data with  the value 
@@ -147,6 +144,6 @@ export function helperHasNestedMessages(parentId: number | null, messages: Messa
 
     // boolean return true if our nesting level is = or more and that message 
     //has replied as well
-    return (nestingLevel >= 2) && hasChild;
+    return (nestingLevel >=2) && hasChild;
 
 }
