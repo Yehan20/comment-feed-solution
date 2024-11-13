@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import { ref } from 'vue';
 import Images from '../assets/images/profileImages';
 import { useCommentFeedStore  } from '../store/commentFeedStore';
 import { Message } from '../types/message';
@@ -8,29 +9,30 @@ import CommentReply from './CommentReply.vue'
 
 const props = defineProps<{
     comments: Message[]
-    allReplies?: Message[],
-
 }>()
 
+// large comment feed we show only 20 first
 const commentFeedStore = useCommentFeedStore ();
+const limit = ref(20);
+const loadMore = ()=>limit.value += 10;
 
 </script>
 <template>
-    <div class="comment__item" v-for="(comment, index) in props.comments" :key="index">
+    <div class="comment__item" v-for="(comment, index) in props.comments.slice(0,limit)" :key="index">
         <div class="comment__user">
             <img :src="comment.profilePic? comment.profilePic : Images.DefaultProfile" width="30" height="30" alt="Profile of a User">
             <div class="line">
             </div>
         </div>
         <div class="comment__body">
-            <p>
+            <p aria-label='Username, Total Points, and Creation Date' >
                 <span>
                     {{ comment.userName }}
                 </span>
                 <b> . {{ comment.points }} Points </b>. {{ getDate(comment.createdAt) }}
             </p>
 
-            <p class="comment__message">
+            <p class="comment__message" aria-label="User comment">
                 {{ comment.message }}
             </p>
 
@@ -47,18 +49,29 @@ const commentFeedStore = useCommentFeedStore ();
             </CommentReply>
         </div>
     </div>
+    <button class="btn btn__load" v-if="limit <= props.comments.length" @click="loadMore">View More Comments {{props.comments.length}}</button>
 </template>
 
 <style lang="scss">
 @use '../assets/scss/mixins.scss' as m;
 @use '../assets/scss/variables.scss' as v;
 
+.btn__load {
+    padding: 10px;
+    background-color: v.$brand-color;
+    border-radius: 20px;
+    margin-top: 20px;
+    color: v.$white;
+
+}
+
 .comment__item {
-    @include m.verticalPadding(10px, 0);
+    @include m.verticalPadding(10px, 10px);
     @include m.flexConfig(flex-start, nowrap, stretch);
     gap: 20px;
-   
     min-width: 572px;
+
+ 
 
     p {
         margin: 0;
@@ -110,6 +123,9 @@ const commentFeedStore = useCommentFeedStore ();
         background-color: v.$secondary-bg;
         margin-top: 2px;
         @include m.center(0);
+    }
+    .load__more {
+       cursor: pointer;    
     }
 }
 </style>

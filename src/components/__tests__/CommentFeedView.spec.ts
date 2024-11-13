@@ -31,6 +31,9 @@ describe('ComentFeedView', () => {
         // Wait for the promises to resolve (if any)
         addIcons(RiLoader2Line);
 
+        await wrapper.vm.$nextTick(); // Wait for async updates
+
+
 
         // Then perform the snapshot test
         expect(wrapper.html()).toMatchSnapshot();
