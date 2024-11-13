@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { PxMessageReply, BiArrowUpCircle, BiArrowDownCircle } from "oh-vue-icons/icons";
+import { PxMessageReply, BiArrowUpCircle, BiArrowDownCircle, FaReply } from "oh-vue-icons/icons";
 import { addIcons } from 'oh-vue-icons';
 import TextEditor from "./TextEditor.vue";
 import {  onUpdated, ref } from "vue";
@@ -11,7 +11,7 @@ import CommentVoteButtonGroup from "./CommentVoteButtonGroup.vue";
 
 
 // Icon Method
-addIcons(PxMessageReply, BiArrowDownCircle, BiArrowUpCircle);
+addIcons(PxMessageReply, BiArrowDownCircle, BiArrowUpCircle,FaReply);
 
 // Props
 const props = defineProps<{
@@ -33,6 +33,7 @@ const canReplyComment = ref(false);
 
 const hasNestedThreads = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))
 
+// change for expand and show child coments
 const showCommentThread = ref(helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id))
 
 const showModal = ref(false);
@@ -51,7 +52,7 @@ const handleCollapseThread = () => {
     showCommentThread.value = !showCommentThread.value
 }
 
-// Collapse the Messages in the level of the newly added message  show it 
+// Collapse the Messages in the level of the newly added message  show it if you add a message its replies in level will auto collapse
 const autoCollapseCommentThread = () => {
 
     if (showCommentThread.value) {
@@ -69,15 +70,14 @@ const handleCancel = () => {
     (message) ? showModal.value = true :
         canReplyComment.value = !canReplyComment.value
      
-        message =0;
+    message =0;
 }
 
 
-// update the value on every change to sync with the comemnts
+// update the value on every change to sync with the comemnts so that we can automaitcally generate hide expand button
 onUpdated(() => {
     hasNestedThreads.value = helperHasNestedMessages(props.messageInfo.parentId, commentFeedStore.commentFeed, props.messageInfo.id)
 
-   
 })
 
 </script>
@@ -86,7 +86,7 @@ onUpdated(() => {
     <div class="comment__item__reply">
 
         <div class="comment__buttons__wrapper">
-            <div class="bg-white rounded">
+            <div>
 
                 <CommentVoteButtonGroup 
                  @@downVote="commentFeedStore.downvoteComment(props.messageInfo.id)"
@@ -103,16 +103,22 @@ onUpdated(() => {
             </button>
 
             <button class="btn reply__btn" title="Click to Reply" v-else @click="canReplyComment = true">
-                Reply <v-icon scale=1 name="px-message-reply"></v-icon>
+                Reply 
+                <v-icon scale=1 name="px-message-reply"></v-icon>
             </button>
 
 
+            <button  @click="handleCollapseThread" v-if="commentFeedStore.getRepliesPerComment(props.messageInfo.id).length" class="btn" title="Total Replies">
+                {{ commentFeedStore.getRepliesPerComment(props.messageInfo.id).length }}    Replies  
+                <v-icon scale=1 name="fa-reply"></v-icon>
+            </button>
+
+       
             <button class="btn" v-if="hasNestedThreads" @click="handleCollapseThread"
                 :title="showCommentThread ? 'Click to expand feed' : 'Click to hide feed'">
                 {{ showCommentThread ? 'Expand +' : 'Hide -' }}
-
-
             </button>
+
         </div>
 
 
@@ -121,8 +127,6 @@ onUpdated(() => {
                 @@autoCollapseNest="autoCollapseCommentThread" @@hideEditor="toggleReply"
                 @@checkMessageLength="message = $event" :showDiscussion="false" />
         </template>
-
-
 
     </div>
 
@@ -142,7 +146,9 @@ onUpdated(() => {
 @use '../assets/scss/variables.scss' as v;
 
 .comment__item__reply {
-
+    label{
+         font-size: 13px;
+    }
 
     p {
         margin: 0;
@@ -154,14 +160,17 @@ onUpdated(() => {
     .comment__buttons__wrapper {
         display: flex;
         gap: 10px;
+        align-items: center;
         margin-bottom: 5px;
+        
         button{
         
                 text-transform: lowercase;
                 border-radius: 20px;
                 padding-left: 10px;
                 padding-right: 10px;
-   
+                background-color: v.$secondary-bg;
+
                 &.btn__upvote {
    
                    padding: 5px;
