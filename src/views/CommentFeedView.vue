@@ -64,7 +64,7 @@ watch(questionId, () => {
 
         <template v-if="isQuestionsLoaded">
             <div class="question__wrapper">
-                <p class="question__author">posted by: <I>{{ commentFeedStore.askedBy }}</I> -
+                <p aria-label="Posted by " class="question__author">posted by: <I>{{ commentFeedStore.askedBy }}</I> -
                     {{ getDate(commentFeedStore.datePosted) }}</p>
 
                 <h1 id="main-title">{{ commentFeedStore.question }}</h1>
@@ -95,9 +95,9 @@ watch(questionId, () => {
                     Most Upvoted
                 </button>
 
-                <button title="Reset" :class="{ selected: !commentFeedStore.isSortByUpvote }" class="btn btn__reset"
+                <button title="Newest Comment" :class="{ selected: !commentFeedStore.isSortByUpvote }" class="btn btn__reset"
                     @click="commentFeedStore.resetSort()">
-                    Reset
+                   Most Recent
                 </button>
             </div>
 
@@ -126,6 +126,8 @@ watch(questionId, () => {
 
 <style lang="scss" scoped>
 @use '../assets/scss/mixins.scss' as m;
+@use '../assets/scss/variables.scss' as v;
+
 
 .comment__feed {
     @include m.verticalPadding(20px, 40px);
@@ -143,6 +145,15 @@ watch(questionId, () => {
     max-width: 950px;
 }
 
+button {
+    &.selected {
+        outline: 1px solid v.$brand-color;
+        opacity: 1;
+        color:v.$white;
+        background-color: v.$brand-color;
+   }
+}
+
 #main-title {
     line-height: 1.2;
     margin: 20px 0;
@@ -151,6 +162,7 @@ watch(questionId, () => {
         font-size: 1.6rem;
     }
 }
+
 
 .question__detail h2 {
     max-width: 750px;

@@ -5,9 +5,7 @@ import CommentReply from "../CommentReply.vue";
 
 import { nextTick } from "vue";
 import { addIcons, OhVueIcon } from "oh-vue-icons";
-import { BiArrowDownCircle, BiArrowUpCircle, PxMessageReply } from "oh-vue-icons/icons";
-
-
+import { BiArrowDownCircle, BiArrowUpCircle, PxMessageReply,FaReply } from "oh-vue-icons/icons";
 
 
 describe('CommentReply', () => {
@@ -19,7 +17,7 @@ describe('CommentReply', () => {
 
 
     // Mounting Test
-    it("Component Should Render Correctly", () => {
+    it("Component Should Render Correctly", async() => {
 
         const wrapper = mount(CommentReply, {
            props:{
@@ -39,8 +37,10 @@ describe('CommentReply', () => {
 
 
         })
-        addIcons(PxMessageReply, BiArrowDownCircle, BiArrowUpCircle);
+        addIcons(PxMessageReply, BiArrowDownCircle, BiArrowUpCircle,FaReply);
 
+
+        await wrapper.vm.$nextTick();
 
 
         expect(wrapper.html()).toMatchSnapshot()

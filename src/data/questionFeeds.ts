@@ -2,14 +2,15 @@ import Images from "../assets/images/profileImages";
 import { Message } from "../types/message";
 
 import { QuestionFeed } from "../types/questionfeed";
+import { DEFAULT_PROFILE } from "../utils/constants";
 
-const commentFeedQ1: Message[] = [
+const commentFeedQ1: Message[] =  [
 
     {
         id: 1,
         message: "It has to be the egg! If you look at evolution, creatures that were almost-chickens would have laid eggs before actual chickens existed. Over time, the genetic mutations in those eggs led to the first true chicken. So, scientifically, the egg came first.",
         parentId: null,
-        points: 7,
+        points: 10,
         isUpvoted: false,
         isDownvoted: true,
         userName: "Zeus",
@@ -138,6 +139,21 @@ const commentFeedQ1: Message[] = [
 
     },
 
+
+
+    {
+        id: 11,
+        message: " Same",
+        parentId:10,
+        points: 1,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Surfer210",
+        profilePic: Images.DefaultProfile,
+        createdAt: new Date("2023-11-10"),
+
+    },
+
     {
         id: 12,
         message: " I know the answer but my is your answer lol",
@@ -248,8 +264,293 @@ const commentFeedQ1: Message[] = [
 
     },
 
-]
+    
+    {
+        id: 20,
+        message: " Chicken came first because egg comes out from chicken but chicken not comes out from eggs.chick comes out from egg.and chick may have both male or femal",
+        parentId:null,
+        points: 5,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Mystic",
+        profilePic:Images.John,
+        createdAt: new Date("2024-09-09"),
 
+    },
+
+
+    
+    {
+        id: 21,
+        message: "If you are prepared to call that egg a chicken's egg, then the egg came first. Otherwise, the chicken came first and the first chicken's egg had to wait until",
+        parentId:null,
+        points: 6,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Rennee",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2024-11-09"),
+
+    },
+
+
+
+    
+    {
+        id: 22,
+        message: " Most biologists state unequivocally that the egg came first. At their most basic level, eggs are just female sex cells. ",
+        parentId:18,
+        points: 11,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Magret",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2023-10-09"),
+
+    },
+
+
+
+
+    
+    {
+        id: 23,
+        message: "The egg came first since chickens, as a species, are only several thousand years old, while eggs can be traced back hundreds of millions.",
+        parentId:null,
+        points: 14,
+        isUpvoted: true,
+        isDownvoted: false,
+        userName: "Dr Gray",
+        profilePic:'',
+        createdAt: new Date("2022-10-09"),
+
+    },
+
+
+    {
+        id: 24,
+        message: "with amniotic eggs showing up roughly 340 million or so years ago, and the first chickens evolving at around 58 thousand years ago at the earliest, it's a safe bet to say the egg came first. Eggs were around way before chickens even existed",
+        parentId:null,
+        points: 17,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Harry Potter",
+        profilePic:'',
+        createdAt: new Date("2024-10-09"),
+
+    },
+
+
+    {
+        id: 25,
+        message: "with amniotic eggs showing up roughly 340 million or so years ago, and the first chickens evolving at around 58 thousand years ago at the earliest, it's a safe bet to say the egg came first. Eggs were around way before chickens even existed",
+        parentId:24,
+        points: 24,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Harry Potter1",
+        profilePic:'',
+        createdAt: new Date("2024-10-09"),
+
+    },
+
+
+
+
+
+
+    {
+        id: 26,
+        message: "with amniotic eggs showing up roughly 340 million or so years ago, and the first chickens evolving at around 58 thousand years ago at the earliest, it's a safe bet to say the egg came first. Eggs were around way before chickens even existed",
+        parentId:25,
+        points: 24,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Harry Potter2",
+        profilePic:'',
+        createdAt: new Date("2024-10-09"),
+
+    },
+
+
+
+    {
+        id: 27,
+        message: "with amniotic eggs showing up roughly 340 million or so years ago, and the first chickens evolving at around 58 thousand years ago at the earliest, it's a safe bet to say the egg came first. Eggs were around way before chickens even existed",
+        parentId:26,
+        points: 24,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Harry Potter3",
+        profilePic:'',
+        createdAt: new Date("2024-10-09"),
+
+    },
+
+
+
+    {
+        id: 28,
+        message: "with amniotic eggs showing up roughly 340 million or so years ago, and the first chickens evolving at around 58 thousand years ago at the earliest, it's a safe bet to say the egg came first. Eggs were around way before chickens even existed",
+        parentId:27,
+        points: 17,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Potter4",
+        profilePic:'',
+        createdAt: new Date("2024-10-09"),
+
+    },
+
+
+
+    {
+        id: 29,
+        message: "Thanks google",
+        parentId:27,
+        points: 26,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Beast",
+        profilePic:'',
+        createdAt: new Date("2024-10-09"),
+
+    },
+
+
+    
+    {
+        id: 30,
+        message: "No Comment",
+        parentId:24,
+        points: 24,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "NoName",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2024-09-09"),
+
+    },
+
+    {
+        id: 31,
+        message: "Hello World",
+        parentId:24,
+        points: 22,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "John Doe",
+        profilePic:DEFAULT_PROFILE.profilePic,
+        createdAt: new Date("2024-08-09"),
+
+    },
+    
+
+
+    {
+        id: 32,
+        message: "So True",
+        parentId:21,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName:DEFAULT_PROFILE.name,
+        profilePic:DEFAULT_PROFILE.profilePic,
+        createdAt: new Date("2024-10-29"),
+
+    },
+
+    
+    {
+        id: 33,
+        message: "I love that logic",
+        parentId:21,
+        points: 3,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName:'Mystic',
+        profilePic:Images.John,
+        createdAt: new Date("2024-10-31"),
+
+    },
+
+      
+    {
+        id: 34,
+        message: "I love pine apple Pizza",
+        parentId:24,
+        points: 20,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Hestia",
+        profilePic:Images.Hestia,
+        createdAt: new Date("2024-09-19"),
+
+    },
+
+
+          
+    {
+        id: 35,
+        message: "@Thanks Mystic",
+        parentId:33,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Rennee",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2024-09-19"),
+
+    },
+
+    {
+        id: 36,
+        message: "@Thanks Doc",
+        parentId:23,
+        points: 5,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Rennee",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2024-11-01"),
+
+    },
+
+
+    {
+        id: 37,
+        message: "@Thanks Sir",
+        parentId:23,
+        points: 6,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Alexa",
+        profilePic:Images.DefaultProfileWomen,
+        createdAt: new Date("2024-11-03"),
+
+    },
+
+    {
+        id: 38,
+        message: "@Thanks Sir",
+        parentId:23,
+        points: 8,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName:DEFAULT_PROFILE.name,
+        profilePic:DEFAULT_PROFILE.profilePic,
+        createdAt: new Date("2024-11-10"),
+
+    },
+
+    
+
+    
+
+
+
+
+]
 const commentFeedQ2:Message[]=[
     {
         id: 1,
@@ -495,21 +796,152 @@ const commentFeedQ3:Message[]=[
         userName: "Lion",
         profilePic: Images.Lion,
         createdAt: new Date("2023-01-01"),
-    }
+    },
+
+
+    {
+        id: 11,
+        message: "I Agree with you here",
+        parentId: 10,
+        points: 7,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Jessica",
+        profilePic: Images.DefaultProfileWomen,
+        createdAt: new Date("2023-02-01"),
+    },
+
+
+    {
+        id: 12,
+        message: "But isnt there something wrong lion",
+        parentId: 10,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Jans",
+        profilePic: '',
+        createdAt: new Date("2023-02-20"),
+    },
+
+
+    {
+        id: 13,
+        message: "Agreee",
+        parentId: 10,
+        points: 3,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Sam",
+        profilePic: '',
+        createdAt: new Date("2023-03-20"),
+    },
+
+
+    
+    {
+        id: 14,
+        message: "I Agree with you here",
+        parentId: 11,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Mystic",
+        profilePic: Images.John,
+        createdAt: new Date("2024-02-01"),
+    },
+
+
+
+    
+    {
+        id: 15,
+        message: "I'm confused",
+        parentId: 11,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Wolf",
+        profilePic: '',
+        createdAt: new Date("2024-05-01"),
+    },
+
+    {
+        id: 16,
+        message: "You Should Be",
+        parentId: 15,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Mystic",
+        profilePic:Images.John,
+        createdAt: new Date("2024-05-01"),
+    },
+
+    {
+        id: 17,
+        message: "@Mystic Look at you",
+        parentId: 16,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Wolf",
+        profilePic: '',
+        createdAt: new Date("2024-06-01"),
+    },
+
+
+    {
+        id: 18,
+        message: "@Wolf Where",
+        parentId: 17,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Mystic",
+        profilePic:Images.John,
+        createdAt: new Date("2024-07-01"),
+    },
+
+    {
+        id: 19,
+        message: "@Mystic Are you smart",
+        parentId: 18,
+        points: 2,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "Wolf",
+        profilePic:'',
+        createdAt: new Date("2024-07-06"),
+    },
+
+
+
+    {
+        id: 20,
+        message: "404 Error .",
+        parentId: 8,
+        points: 10,
+        isUpvoted: false,
+        isDownvoted: false,
+        userName: "FreeZerr",
+        profilePic: '',
+        createdAt: new Date("2022-05-01"),
+    },
+
+
 ]
-
-
 
 
 export  const questionFeeds:QuestionFeed[] = [
 
       {
          id:"Q1",
-         question:"what came first the Egg or the Hen ??",
+         question:"what came first the Egg or the Hen ?",
          isUpvoted:false,
          isDownvoted:false,
          points:222,
-         askedBy:"Interactive Hark",
+         askedBy:"Peter Johnson",
          commentFeed:[...commentFeedQ1],
          isSortByUpvote:false,
          datePosted:new Date("2023-11-08"),
@@ -524,7 +956,7 @@ export  const questionFeeds:QuestionFeed[] = [
         isDownvoted:false,
         isSortByUpvote:false,
         points:22,
-        askedBy:"John Doe",
+        askedBy:"Michel S",
         datePosted:new Date("2023-11-08"),
         commentFeed:[...commentFeedQ2],
         questionDesc:"I keep thinking about this strange question. My friend asked me to really think about it and come up with an answer. If no one's there to hear the tree, does it actually make a sound, or does it even matter?"
@@ -539,7 +971,7 @@ export  const questionFeeds:QuestionFeed[] = [
         isSortByUpvote:false,
         datePosted:new Date("2023-11-08"),
         points:202,
-        askedBy:"Tom Smith",
+        askedBy:"Tim Macintosh",
         commentFeed:[...commentFeedQ3],
         questionDesc:"I've been reading about time travel, and it's mind-boggling! Some scientists say it could be possible, while others think it's just fantasy.?"
      }

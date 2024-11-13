@@ -26,9 +26,11 @@ Link to the application: 'https://yn-comments-hub.netlify.app/ '
 - Recursion to Make Nested Comments
 
 ## Assumptions 
+
 - Used Reddits upvote  | downvote mechanism
+- By Default Most Recent is Sorted
 - You can only upvote or downvote once considering you are a user
-- Nested comments are collapsed after 3 levels to improve readability.
+- Nested comments are collapsed after 1 levels to improve readability.
 - Cancelling a reply triggers a **confirmation modal**.
 
 

@@ -29,4 +29,8 @@ export function getDate(createdDate:Date) {
 
 }
 
+// Get Difference Between Dates 
+export function getDiff(a:string,b:string){
 
+    return   new Date(b).getTime()  -  new Date(a).getTime() 
+ }

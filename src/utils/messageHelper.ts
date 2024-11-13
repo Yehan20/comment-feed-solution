@@ -1,4 +1,5 @@
 import { LocalStorage, Message } from "../types/message"
+import { ANESTORY_LEVEL } from "./constants"
 
 // Upvote senarios  breakdown
 export function helperUpvote(changedComment: Message) {
@@ -144,6 +145,7 @@ export function helperHasNestedMessages(parentId: number | null, messages: Messa
 
     // boolean return true if our nesting level is = or more and that message 
     //has replied as well
-    return (nestingLevel >=2) && hasChild;
+    return (nestingLevel >=ANESTORY_LEVEL) && hasChild;
 
 }
+

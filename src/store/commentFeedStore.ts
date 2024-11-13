@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
 import type { LocalStorage, Message } from '../types/message';
-import { helperDownvote, helperUpvote, helperLocalStorage, helperUpdateLocalStorage } from '../utils/messageHelper';
+import { helperDownvote, helperUpvote, helperLocalStorage, helperUpdateLocalStorage} from '../utils/messageHelper';
 import { questionFeeds } from '../data/questionFeeds';
 import { QuestionFeed } from '../types/questionfeed';
+import { getDiff } from '../utils/dateHelper';
 
 
 /*
@@ -36,8 +37,8 @@ export const useCommentFeedStore  = defineStore('comments', {
             question: '',
             questionDesc: "",
             activeQuestion:'Q1',
-            datePosted:new Date()
-      
+            datePosted:new Date(),
+
         }
     },
 
@@ -46,34 +47,24 @@ export const useCommentFeedStore  = defineStore('comments', {
         // get call comments 
         getComments(state) {
 
-            if (state.isSortByUpvote) {
-                return (id: number | null) => state.commentFeed.filter((comment) => comment.parentId === id).sort((a, b) => b.points - a.points);
-            }
             return (id: number | null) => state.commentFeed.filter((comment) => comment.parentId === id)
         },
         
         // get all replies no matter what comment 
         getReplies(state) {
       
-            if (state.isSortByUpvote) {
-
-                return state.commentFeed.filter((comment) => comment.parentId !== null).sort((a, b) => b.points - a.points);
-
-            }
             return state.commentFeed.filter((replyForComment) => replyForComment.parentId !== null); // ld    
         },
        
         // ALl replies avaible per comment
         getRepliesPerComment() {
-
             return (id: number) => this.getReplies.filter((reply) => reply.parentId == id)
         },
         
-        //  match reply per comment
+        //  match reply per comment 
         getReplyPerComment() {
             return (id: number) => this.getReplies.filter((reply) => reply.id === id)
         },
-
 
     },
 
@@ -82,8 +73,8 @@ export const useCommentFeedStore  = defineStore('comments', {
         // add new comment to post
         addComment(comment: Message) {
 
-            this.commentFeed.push(comment);
-
+             this.commentFeed.unshift(comment);
+ 
             helperUpdateLocalStorage(this.questionId, { commentFeed: [...this.commentFeed] })
 
         },
@@ -133,7 +124,7 @@ export const useCommentFeedStore  = defineStore('comments', {
 
         },
        
-        // specific reply
+        // specific reply comment
         upvoteComment(id: number) {
    
             let changedComment = this.commentFeed.find((comment) => comment.id === id) as Message
@@ -143,7 +134,7 @@ export const useCommentFeedStore  = defineStore('comments', {
 
         },
        
-        // specific reply
+        // specific reply comment
         downvoteComment(id: number) {
 
             let changedComment = this.commentFeed.find((comment) => comment.id === id) as Message
@@ -190,15 +181,12 @@ export const useCommentFeedStore  = defineStore('comments', {
        
         // sort by most upvoted comments 
         sortByUpvote() {
-
-            if (!this.isSortByUpvote) {
+  
                 this.isSortByUpvote = true
                 this.isLoaded = false;
-
-                helperUpdateLocalStorage(this.questionId, { isSortByUpvote: this.isSortByUpvote })
-            }
-
-
+                this.commentFeed.sort((a, b) => b.points - a.points)
+                helperUpdateLocalStorage(this.questionId, { isSortByUpvote: this.isSortByUpvote,commentFeed:this.commentFeed })
+            
         },
 
         // load from storage or from memory
@@ -207,10 +195,12 @@ export const useCommentFeedStore  = defineStore('comments', {
             const fromLocal = helperLocalStorage(this.questionId) as LocalStorage | null;
 
             if (!fromLocal) {
+
                 const questionFeed: QuestionFeed = {...questionFeeds.find((questionFeed) => questionFeed.id === this.questionId) as QuestionFeed};
 
 
-                this.commentFeed = questionFeed.commentFeed
+                this.commentFeed = [...questionFeed.commentFeed.sort((a,b)=>(getDiff(a.createdAt.toString(),b.createdAt.toString())))] // spread to prevent makin references
+    
                 this.totalPoints = questionFeed.points;
                 this.askedBy = questionFeed.askedBy;
                 this.isDownvoted = questionFeed.isDownvoted;
@@ -236,7 +226,6 @@ export const useCommentFeedStore  = defineStore('comments', {
             }
             else {
 
-                this.commentFeed = fromLocal.commentFeed as Message[];
                 this.isSortByUpvote = fromLocal.isSortByUpvote as boolean;
                 this.askedBy = fromLocal.askedBy as string;
                 this.question = fromLocal.question as string;
@@ -245,35 +234,36 @@ export const useCommentFeedStore  = defineStore('comments', {
                 this.isUpvoted = fromLocal.isUpvoted as boolean;
                 this.totalPoints = fromLocal.totalPoints as number;
                 this.datePosted   = fromLocal.datePosted as Date
+                let feed=  (fromLocal.commentFeed) as Message[]
+
+                this.isSortByUpvote 
+                ?  this.commentFeed = feed.sort((a,b)=>b.points - a.points)
+                 : 
+                 this.commentFeed = feed.sort((a,b)=>(getDiff(a.createdAt.toString(),b.createdAt.toString())))
+      
             }
 
             this.isLoaded = true;
-
         },
      
         // get default order
         resetSort() {
 
-            if (this.isSortByUpvote) {
                 this.isSortByUpvote = false
+                this.commentFeed.sort((a,b)=>(getDiff(a.createdAt.toString(),b.createdAt.toString())))
                 this.isLoaded = false;
-            }
-
-
-            helperUpdateLocalStorage(this.questionId, { isSortByUpvote: this.isSortByUpvote })
+            
+                helperUpdateLocalStorage(this.questionId, { isSortByUpvote: this.isSortByUpvote,commentFeed:this.commentFeed })
         },
         
         // toggle between questions
         changeQuestion(qId: string) {
            
             helperUpdateLocalStorage(this.questionId, { isSortByUpvote: false })
-
             this.questionId = qId;
-    
             this.loadFeed();
       
         }
-
 
     }
 
