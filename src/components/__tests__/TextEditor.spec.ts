@@ -4,7 +4,7 @@ import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { nextTick } from "vue";
 import { useCommentFeedStore  } from "../../store/commentFeedStore";
-import TextEditorAddButton from "../TextEditorAddButton.vue";
+
 
 describe('TextEditor', () => {
 
@@ -36,7 +36,7 @@ describe('TextEditor', () => {
             },
         });
 
-        const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+        const editorArea = wrapper.find('textarea');
 
         await editorArea.setValue("Hello World");
 
@@ -53,12 +53,12 @@ describe('TextEditor', () => {
 
         const wrapper = mount(TextEditor, {
             props: {
-                showDiscussion: true, 
+                showDiscussion: false, 
                 parentId: 123,        
                 userName: 'JohnDoe',  
             },
         });
-        const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+        const editorArea = wrapper.find('textarea')
 
         await editorArea.setValue("Abc");
 
@@ -84,7 +84,7 @@ describe('TextEditor', () => {
 
         const longText = '&'.repeat(500); // Creates a string of 500 'a' characters
 
-        const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+        const editorArea = wrapper.find('textarea');
 
         await editorArea.setValue(longText);
 
@@ -99,6 +99,7 @@ describe('TextEditor', () => {
     // Add Comment Feature Test
     it("Should add a comment after clicking add comment", async () => {
         // Mount the component with the Pinia store
+        const commentFeedStore = useCommentFeedStore ();
         const wrapper = mount(TextEditor, {
             props: {
                 showDiscussion: true,  
@@ -106,18 +107,29 @@ describe('TextEditor', () => {
                 userName: 'JohnDoe',   
             },
         })
+        
+        commentFeedStore.commentFeed.push({
+             id:1,
+             parentId:null,
+             message:"abcd",
+             createdAt:new Date(),
+             isDownvoted:false,
+             isUpvoted:false,
+             points:10,
+             profilePic:"",
+             userName:"Yean",
+        })
 
-        const commentFeedStore = useCommentFeedStore ();
 
         // Simulate typing a comment into the text area
-        const testingValue = "hello from mars";
+        const testingValue = "abcd";
 
-        const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+        const editorArea = wrapper.find('textarea');
 
         await editorArea.setValue(testingValue);
 
         // Find the submit button and simulate a click
-        const button = wrapper.findComponent(TextEditorAddButton)
+        const button = wrapper.find('.btn__comment')
         await button.trigger('click');
 
         // Wait for the DOM to update
@@ -144,11 +156,11 @@ describe('TextEditor', () => {
 
         const testingValue = "";
 
-        const editorArea = wrapper.findComponent({ name: 'TextEditor' }).find('textarea');
+        const editorArea = wrapper.find('textarea');
 
         await editorArea.setValue(testingValue);
 
-        const button = wrapper.findComponent(TextEditorAddButton)
+        const button = wrapper.find('.btn__comment')
         await button.trigger('click');
 
         await wrapper.vm.$nextTick();
