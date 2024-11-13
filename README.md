@@ -33,12 +33,15 @@ Link to the application: 'https://yn-comments-hub.netlify.app/ '
 - Nested comments are collapsed after 1 levels to improve readability.
 - Cancelling a reply triggers a **confirmation modal**.
 
-
 ## Extra Features
 - Toggle Between new questions
 - Upvote and downvote main questions Points
 - Mention User name when replying option
 
+## Future Enhancement Ideas
+- Add Routing Navigate Between New Feeds
+- Allow User to Post a Question 
+- Allow Question to be edited and Deleted
 
 ## Get started
 

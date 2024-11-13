@@ -133,6 +133,10 @@ watch(questionId, () => {
     @include m.verticalPadding(20px, 40px);
     max-width: 1100px;
     width: 100%;
+    
+    @include m.for-mobile {
+        @include m.verticalPadding(5px, 40px);
+   }
 }
 
 .comments__section {
