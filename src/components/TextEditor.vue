@@ -180,6 +180,7 @@ onUnmounted(()=>{
 
      @include m.for-mobile {
           min-width: 300px;
+          margin-left: 0;
      }
 
      h3 {
