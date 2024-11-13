@@ -152,7 +152,7 @@ onUnmounted(()=>{
 
           </div>
 
-          <form @submit.prevent role="form" autocomplete="on">
+          <form @submit.prevent  autocomplete="on">
                <textarea :disabled="isAddingComment" ref="text-area" @input="handleInput" :value="message" name="" id="" :rows="8"
                     class="text__editor" :class="{ error: error }" placeholder="Make it Creative :)"></textarea>
                <div class="text__editor__footer">
