@@ -23,13 +23,13 @@ const isVisible = ref(true);
 
       <div v-show="isVisible" class="more__questions">
         <h2>More Questions</h2>
-        <button v-if="commentFeedStore.questionId !== 'Q1'" @click="commentFeedStore.changeQuestion('Q1')">
+        <button title="Click to View This Question" v-if="commentFeedStore.questionId !== 'Q1'" @click="commentFeedStore.changeQuestion('Q1')">
           {{ questionFeeds[0].question }}
         </button>
-        <button v-if="commentFeedStore.questionId !== 'Q2'" @click="commentFeedStore.changeQuestion('Q2')">
+        <button title="Click to View This Question" v-if="commentFeedStore.questionId !== 'Q2'" @click="commentFeedStore.changeQuestion('Q2')">
           {{ questionFeeds[1].question }}
         </button>
-        <button v-if="commentFeedStore.questionId !== 'Q3'" @click="commentFeedStore.changeQuestion('Q3')">
+        <button title="Click to View This Question" v-if="commentFeedStore.questionId !== 'Q3'" @click="commentFeedStore.changeQuestion('Q3')">
           {{ questionFeeds[2].question }}
         </button>
       </div>
@@ -76,7 +76,8 @@ article {
   background: v.$brand-color;
   color: #fff;
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 30px;
+  text-transform: uppercase;
   cursor: pointer;
   transform: translateY(18px);
   font-size: 0.9rem;
