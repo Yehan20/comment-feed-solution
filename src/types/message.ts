@@ -10,6 +10,7 @@ export interface Message {
       createdAt: Date;
       profilePic: string;
       userName: string;
+      isDeleated?:boolean;
 }
 
 export interface LocalStorage {
