@@ -17,6 +17,7 @@ const emit = defineEmits<{
      '@hideEditor': [],
      '@autoCollapseNest': [],
      '@checkMessageLength': [amount: number],
+     '@deleteComment':[id:number],
 }>()
 
 // Pinia Store
@@ -147,7 +148,7 @@ onUnmounted(()=>{
 <template>
      <div class="text__editor__container">
           <div class="text__editor__top">
-               <h3 v-if="props.showDiscussion">Discussion ({{ commentFeedStore.commentFeed.length }} comments)</h3>
+               <h3 v-if="props.showDiscussion">Discussion ({{ commentFeedStore.getActiveComment}} comments)</h3>
                <h3 v-if="error" class="error__text">{{ error }}</h3>
 
           </div>

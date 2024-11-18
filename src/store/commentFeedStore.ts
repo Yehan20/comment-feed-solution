@@ -65,7 +65,13 @@ export const useCommentFeedStore  = defineStore('comments', {
         getReplyPerComment() {
             return (id: number) => this.getReplies.filter((reply) => reply.id === id)
         },
-
+        
+        // get Active Comments coments are not deleted becuase we implement new feature
+        getActiveComment(state){
+             
+            // get all coments that which isDeleated doesnt have a type of boolean 
+             return  state.commentFeed.filter((comment)=>typeof comment.isDeleated !== 'boolean' ).length
+        }
     },
 
     actions: {
@@ -200,7 +206,8 @@ export const useCommentFeedStore  = defineStore('comments', {
 
 
                 this.commentFeed = [...questionFeed.commentFeed.sort((a,b)=>(getDiff(a.createdAt.toString(),b.createdAt.toString())))] // spread to prevent makin references
-    
+               
+
                 this.totalPoints = questionFeed.points;
                 this.askedBy = questionFeed.askedBy;
                 this.isDownvoted = questionFeed.isDownvoted;
@@ -263,7 +270,22 @@ export const useCommentFeedStore  = defineStore('comments', {
             this.questionId = qId;
             this.loadFeed();
       
-        }
+        },
+
+        //delete  comment 
+         deleteComment(id:number) {
+            
+            // fetch the comment
+            const updatedComment = this.commentFeed.find((comment)=>comment.id == id) as Message; 
+           
+            // if this propery is not existing add the attribute
+            if(!updatedComment.hasOwnProperty("isDeleted")){
+                   updatedComment.isDeleated = true; // make it deleted 
+            }
+            
+            // sync it with the local storage
+            helperUpdateLocalStorage(this.questionId, { commentFeed: [...this.commentFeed] })
+         }
 
     }
 
