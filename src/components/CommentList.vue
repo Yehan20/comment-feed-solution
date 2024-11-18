@@ -2,7 +2,7 @@
 
 import { ref } from 'vue';
 import Images from '../assets/images/profileImages';
-import { useCommentFeedStore  } from '../store/commentFeedStore';
+import { useCommentFeedStore } from '../store/commentFeedStore';
 import { Message } from '../types/message';
 import { getDate } from '../utils/dateHelper';
 import CommentReply from './CommentReply.vue'
@@ -12,44 +12,53 @@ const props = defineProps<{
 }>()
 
 // large comment feed we show only 20 first
-const commentFeedStore = useCommentFeedStore ();
+const commentFeedStore = useCommentFeedStore();
 const limit = ref(20);
-const loadMore = ()=>limit.value += 10;
+const loadMore = () => limit.value += 10;
 
 </script>
 <template>
-    <div class="comment__item" v-for="(comment, index) in props.comments.slice(0,limit)" :key="index">
-        <div class="comment__user">
-            <img :src="comment.profilePic? comment.profilePic : Images.DefaultProfile" width="30" height="30" alt="Profile of a User">
+    <div class="comment__item" v-for="(comment, index) in props.comments.slice(0, limit)" :key="index">
+        <div class="comment__user" :class="comment.isDeleated ? 'deleted' : ''">
+            <img :src="comment.profilePic ? comment.profilePic : Images.DefaultProfile" width="30" height="30"
+                alt="Profile of a User">
             <div class="line">
             </div>
         </div>
         <div class="comment__body">
-            <p aria-label='Username, Total Points, and Creation Date' >
-                <span>
-                    {{ comment.userName }}
-                </span>
-                <b> . {{ comment.points }} Points </b>. {{ getDate(comment.createdAt) }}
-            </p>
+    
+                <p v-if="!comment.isDeleated" aria-label='Username, Total Points, and Creation Date'>
+                    <span>
+                        {{ comment.userName }}
+                    </span>
+                    <b> . {{ comment.points }} Points </b>. {{ getDate(comment.createdAt) }}
+                </p>
+                <p v-else :class="comment.isDeleated ? 'deleted' : ''">
+                  Comment Deleted by You 
+                </p>
+ 
 
-            <p class="comment__message" aria-label="User comment">
-                {{ comment.message }}
-            </p>
+                <p v-if="!comment.isDeleated" class="comment__message" aria-label="User comment">
+                    {{ comment.message }}
+                </p>
+
 
             <CommentReply :messageInfo="{
                 id: comment.id,
                 upvoted: comment.isUpvoted, downvoted: comment.isDownvoted,
                 parentId: comment.parentId,
                 userName: comment.userName ?? '',
+                isDeleted: comment.isDeleated,
+
             }">
                 <comment-list v-for="(subComment, index) in commentFeedStore.getRepliesPerComment(comment.id)"
-                    :key="index" :comments="commentFeedStore.getReplyPerComment(subComment.id)"
-                     />
+                    :key="index" :comments="commentFeedStore.getReplyPerComment(subComment.id)" />
 
             </CommentReply>
         </div>
     </div>
-    <button class="btn btn__load" v-if="limit <= props.comments.length" @click="loadMore">View More Comments {{props.comments.length}}</button>
+    <button class="btn btn__load" v-if="limit <= props.comments.length" @click="loadMore">View More Comments
+        {{ props.comments.length }}</button>
 </template>
 
 <style lang="scss">
@@ -71,7 +80,12 @@ const loadMore = ()=>limit.value += 10;
     gap: 20px;
     min-width: 572px;
 
- 
+    .deleted {
+        opacity: 0.5;
+        margin-bottom: 10px;
+    }
+
+
 
     p {
         margin: 0;
@@ -124,8 +138,9 @@ const loadMore = ()=>limit.value += 10;
         margin-top: 2px;
         @include m.center(0);
     }
+
     .load__more {
-       cursor: pointer;    
+        cursor: pointer;
     }
 }
 </style>
