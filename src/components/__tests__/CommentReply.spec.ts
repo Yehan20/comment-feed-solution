@@ -26,7 +26,8 @@ describe('CommentReply', () => {
                  parentId:1,
                  downvoted:false,
                  upvoted:false,
-                 userName:"Yehan"
+                 userName:"Yehan",
+                 isDeleted:false, 
             }
            },
            global: {
@@ -60,6 +61,7 @@ describe('CommentReply', () => {
                   parentId: 1,
                   upvoted: false,
                   downvoted: false,
+                  isDeleted:false, 
               }
           },
 
@@ -97,6 +99,7 @@ describe('CommentReply', () => {
                 parentId: 1,
                 upvoted: false,
                 downvoted: false,
+                isDeleted:false, 
             }
         },
         global: {
